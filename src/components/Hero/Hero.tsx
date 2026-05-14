@@ -179,16 +179,66 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
           className='mb-7 flex justify-center'
         >
-          <div
-            className='flex h-14 w-14 items-center justify-center rounded-full border border-cyan-400/25'
-            style={{ boxShadow: '0 0 32px rgba(0,229,255,0.14), inset 0 0 16px rgba(0,229,255,0.05)' }}
-          >
-            <span
-              className='font-mono text-lg font-black text-cyan-400'
-              style={{ textShadow: '0 0 12px rgba(0,229,255,0.7)' }}
+          {/* solar system — three concentric orbits at different speeds */}
+          <div className='relative flex h-40 w-40 items-center justify-center'>
+
+            {/* orbit 1 — inner, fast, clockwise, cyan dashed */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
+              className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full'
+              style={{ width: 76, height: 76, border: '1px dashed rgba(0,229,255,0.22)' }}
             >
-              JS
-            </span>
+              <span
+                className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-cyan-400'
+                style={{ boxShadow: '0 0 8px rgba(0,229,255,1), 0 0 16px rgba(0,229,255,0.5)' }}
+              />
+            </motion.div>
+
+            {/* orbit 2 — mid, counter-clockwise, purple dashed */}
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
+              className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full'
+              style={{ width: 112, height: 112, border: '1px dashed rgba(168,85,247,0.18)' }}
+            >
+              <span
+                className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1 w-1 rounded-full bg-purple-400'
+                style={{ boxShadow: '0 0 6px rgba(168,85,247,0.9), 0 0 12px rgba(168,85,247,0.4)' }}
+              />
+            </motion.div>
+
+            {/* orbit 3 — outer, slow, clockwise, indigo solid */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+              className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full'
+              style={{ width: 150, height: 150, border: '1px solid rgba(99,102,241,0.12)' }}
+            >
+              <span
+                className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1 w-1 rounded-full bg-indigo-400'
+                style={{ boxShadow: '0 0 6px rgba(99,102,241,0.85)' }}
+              />
+            </motion.div>
+
+            {/* JS badge — the star at the center */}
+            <motion.div
+              animate={{ boxShadow: [
+                '0 0 24px rgba(0,229,255,0.12), inset 0 0 12px rgba(0,229,255,0.05)',
+                '0 0 40px rgba(0,229,255,0.22), inset 0 0 20px rgba(0,229,255,0.08)',
+                '0 0 24px rgba(0,229,255,0.12), inset 0 0 12px rgba(0,229,255,0.05)',
+              ]}}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className='relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-cyan-400/25'
+            >
+              <span
+                className='font-mono text-lg font-black text-cyan-400'
+                style={{ textShadow: '0 0 12px rgba(0,229,255,0.7)' }}
+              >
+                JS
+              </span>
+            </motion.div>
+
           </div>
         </motion.div>
 
