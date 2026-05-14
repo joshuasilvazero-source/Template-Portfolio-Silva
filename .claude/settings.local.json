@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"/c/Users/joshu/OneDrive/Desktop/ERA Solutions/React JS Website/portfolio-website/portfolio-template-project/Template-Portfolio-Silva\" && cat package.json | grep -A5 '\"scripts\"')",
+      "Read(//c/c/Users/joshu/OneDrive/Desktop/ERA Solutions/React JS Website/portfolio-website/portfolio-template-project/Template-Portfolio-Silva/**)"
+    ]
+  }
+}
