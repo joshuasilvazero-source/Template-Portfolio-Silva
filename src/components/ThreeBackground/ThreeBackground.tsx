@@ -27,7 +27,7 @@ export default function ThreeBackground() {
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
+    scene.background = new THREE.Color(0x00020f);
 
     const camera = new THREE.PerspectiveCamera(
       70,
@@ -55,6 +55,23 @@ export default function ThreeBackground() {
     window.addEventListener('mousemove', onMouse);
     window.addEventListener('resize', onResize);
 
+    /* circular glow sprite — replaces default square points */
+    const starTexture = (() => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext('2d')!;
+      const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      g.addColorStop(0,    'rgba(255,255,255,1)');
+      g.addColorStop(0.1,  'rgba(255,255,255,0.9)');
+      g.addColorStop(0.3,  'rgba(255,255,255,0.25)');
+      g.addColorStop(0.6,  'rgba(255,255,255,0.05)');
+      g.addColorStop(1,    'rgba(255,255,255,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 64, 64);
+      return new THREE.CanvasTexture(canvas);
+    })();
+
     function createStarLayer(
       count: number,
       spreadX: number,
@@ -72,40 +89,44 @@ export default function ThreeBackground() {
       for (let i = 0; i < count; i++) {
         const i3 = i * 3;
 
-        positions[i3] = (Math.random() - 0.5) * spreadX;
+        positions[i3]     = (Math.random() - 0.5) * spreadX;
         positions[i3 + 1] = (Math.random() - 0.5) * spreadY;
         positions[i3 + 2] = -Math.random() * depth;
 
         velocities[i] = speed * (0.65 + Math.random() * 0.7);
 
+        /* blue-white palette — warm orange removed since nebula is gone */
         const type = Math.random();
-
-        if (type < 0.68) {
-          colors[i3] = 0.86;
-          colors[i3 + 1] = 0.92;
+        if (type < 0.72) {
+          /* blue-white — most common */
+          colors[i3] = 0.82 + Math.random() * 0.08;
+          colors[i3 + 1] = 0.90 + Math.random() * 0.05;
           colors[i3 + 2] = 1.0;
-        } else if (type < 0.9) {
-          colors[i3] = 1.0;
-          colors[i3 + 1] = 0.9;
-          colors[i3 + 2] = 0.72;
+        } else if (type < 0.92) {
+          /* pure white */
+          const w = 0.95 + Math.random() * 0.05;
+          colors[i3] = w; colors[i3 + 1] = w; colors[i3 + 2] = w;
         } else {
-          colors[i3] = 1.0;
-          colors[i3 + 1] = 0.58;
-          colors[i3 + 2] = 0.36;
+          /* cool ice-blue */
+          colors[i3] = 0.60 + Math.random() * 0.1;
+          colors[i3 + 1] = 0.80 + Math.random() * 0.1;
+          colors[i3 + 2] = 1.0;
         }
       }
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      geometry.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
         size,
+        map: starTexture,
         vertexColors: true,
         transparent: true,
         opacity,
         depthWrite: false,
         sizeAttenuation: true,
-        blending: THREE.NormalBlending,
+        blending: THREE.AdditiveBlending,
+        alphaTest: 0.001,
       });
 
       return {
@@ -118,33 +139,21 @@ export default function ThreeBackground() {
     }
 
     const farStars = createStarLayer(
-      isMobile ? 1200 : 3200,
-      1800,
-      950,
-      1400,
-      0.26,
-      0.48,
-      0.018
+      isMobile ? 3500 : 10000,
+      1800, 950, 1400,
+      0.60, 0.75, 0.018
     );
 
     const midStars = createStarLayer(
-      isMobile ? 900 : 2400,
-      1200,
-      720,
-      900,
-      0.42,
-      0.72,
-      0.04
+      isMobile ? 2500 : 7000,
+      1200, 720, 900,
+      0.90, 0.90, 0.04
     );
 
     const nearStars = createStarLayer(
-      isMobile ? 500 : 1300,
-      750,
-      460,
-      520,
-      0.7,
-      0.9,
-      0.085
+      isMobile ? 1200 : 3800,
+      750, 460, 520,
+      1.40, 1.0, 0.085
     );
 
     scene.add(farStars.points, midStars.points, nearStars.points);
@@ -359,6 +368,7 @@ export default function ThreeBackground() {
         }
       });
 
+      starTexture.dispose();
       renderer.dispose();
 
       if (mount.contains(renderer.domElement)) {
@@ -375,32 +385,12 @@ export default function ThreeBackground() {
         style={{ pointerEvents: 'none' }}
       />
 
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-[9]"
-        style={{
-          background:
-            'radial-gradient(circle at 78% 42%, rgba(255,145,70,0.11), transparent 15%, rgba(255,145,70,0.03) 25%, transparent 42%)',
-          filter: 'blur(18px)',
-        }}
-      />
-
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-[8]"
-        style={{
-          background:
-            'radial-gradient(circle at 76% 44%, rgba(255,180,90,0.035), transparent 30%)',
-          filter: 'blur(48px)',
-        }}
-      />
-
-      <div
+<div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-[7]"
         style={{
           background:
-            'radial-gradient(circle at center, transparent 48%, rgba(0,0,0,0.68) 100%)',
+            'radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.38) 100%)',
         }}
       />
     </>

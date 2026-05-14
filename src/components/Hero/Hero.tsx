@@ -177,17 +177,15 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className='mb-7 flex justify-center'
+          className='mb-5 flex justify-center'
         >
-          {/* solar system — three concentric orbits at different speeds */}
-          <div className='relative flex h-40 w-40 items-center justify-center'>
+          <div className='relative flex h-28 w-28 items-center justify-center'>
 
-            {/* orbit 1 — inner, fast, clockwise, cyan dashed */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
               className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full'
-              style={{ width: 76, height: 76, border: '1px dashed rgba(0,229,255,0.22)' }}
+              style={{ width: 56, height: 56, border: '1px dashed rgba(0,229,255,0.22)' }}
             >
               <span
                 className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-cyan-400'
@@ -195,12 +193,11 @@ const Hero: React.FC = () => {
               />
             </motion.div>
 
-            {/* orbit 2 — mid, counter-clockwise, purple dashed */}
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
               className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full'
-              style={{ width: 112, height: 112, border: '1px dashed rgba(168,85,247,0.18)' }}
+              style={{ width: 82, height: 82, border: '1px dashed rgba(168,85,247,0.18)' }}
             >
               <span
                 className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1 w-1 rounded-full bg-purple-400'
@@ -208,12 +205,11 @@ const Hero: React.FC = () => {
               />
             </motion.div>
 
-            {/* orbit 3 — outer, slow, clockwise, indigo solid */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
               className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full'
-              style={{ width: 150, height: 150, border: '1px solid rgba(99,102,241,0.12)' }}
+              style={{ width: 110, height: 110, border: '1px solid rgba(99,102,241,0.10)' }}
             >
               <span
                 className='absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1 w-1 rounded-full bg-indigo-400'
@@ -221,19 +217,18 @@ const Hero: React.FC = () => {
               />
             </motion.div>
 
-            {/* JS badge — the star at the center */}
             <motion.div
               animate={{ boxShadow: [
-                '0 0 24px rgba(0,229,255,0.12), inset 0 0 12px rgba(0,229,255,0.05)',
-                '0 0 40px rgba(0,229,255,0.22), inset 0 0 20px rgba(0,229,255,0.08)',
-                '0 0 24px rgba(0,229,255,0.12), inset 0 0 12px rgba(0,229,255,0.05)',
+                '0 0 20px rgba(0,229,255,0.10), inset 0 0 10px rgba(0,229,255,0.04)',
+                '0 0 32px rgba(0,229,255,0.20), inset 0 0 16px rgba(0,229,255,0.07)',
+                '0 0 20px rgba(0,229,255,0.10), inset 0 0 10px rgba(0,229,255,0.04)',
               ]}}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className='relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-cyan-400/25'
+              className='relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-cyan-400/25'
             >
               <span
-                className='font-mono text-lg font-black text-cyan-400'
-                style={{ textShadow: '0 0 12px rgba(0,229,255,0.7)' }}
+                className='font-mono text-sm font-black text-cyan-400'
+                style={{ textShadow: '0 0 10px rgba(0,229,255,0.7)' }}
               >
                 JS
               </span>
@@ -288,7 +283,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className='mx-auto mb-10 max-w-xl font-mono text-sm leading-relaxed text-gray-400 md:text-base'
+          className='mx-auto mb-10 max-w-xl font-sans text-sm leading-relaxed text-gray-400 md:text-base'
         >
           {typedSub}
           {(phase === 2 || phase === 3) && (
@@ -332,7 +327,7 @@ const Hero: React.FC = () => {
             href='#about'
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className='rounded-lg border border-white/10 bg-white/3 px-7 py-3 font-mono text-sm font-bold text-white/50 backdrop-blur-sm transition-colors hover:border-white/20 hover:text-white/70'
+            className='rounded-lg border border-white/10 bg-white/3 px-7 py-3 font-mono text-sm font-bold text-white/65 backdrop-blur-sm transition-colors hover:border-white/20 hover:text-white/80'
           >
             About
           </motion.a>
@@ -343,7 +338,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.75 }}
-          className='mb-10 flex flex-wrap justify-center gap-x-3 gap-y-1.5 font-mono text-[11px] text-gray-600'
+          className='mb-10 flex flex-wrap justify-center gap-x-3 gap-y-1.5 font-mono text-[11px] text-gray-500'
         >
           {STACK.map((t, i) => (
             <span key={t} className='flex items-center gap-2'>
@@ -358,10 +353,10 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.85 }}
-          className='overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-sm'
+          className='overflow-hidden rounded-xl border border-white/7 bg-white/2 backdrop-blur-sm'
           style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04)' }}
         >
-          <div className='grid grid-cols-3 divide-x divide-white/[0.07]'>
+          <div className='grid grid-cols-3 divide-x divide-white/7'>
             {STATS.map(({ value, label, color, glow }) => (
               <div key={label} className='px-4 py-5 text-center'>
                 <p
