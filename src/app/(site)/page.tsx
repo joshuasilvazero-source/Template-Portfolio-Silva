@@ -1,37 +1,36 @@
-import BlogSection from "@/components/Blog";
-import CallToAction from "@/components/CallToAction";
-import Clients from "@/components/Home/Clients";
-import Features from "@/components/Home/Features";
-import FeaturesList from "@/components/Home/FeaturesList";
-import Hero from "@/components/Home/Hero";
-import Reviews from "@/components/Home/Reviews";
-import Newsletter from "@/components/Newsletter";
-import Pricing from "@/components/Pricing";
-import Support from "@/components/Support";
-import { Metadata } from "next";
-import { integrations } from "../../../integrations.config";
+import { Metadata } from 'next';
+import Hero from '@/components/Hero/Hero';
+import About from '@/components/About/About';
+import Skills from '@/components/Skills/Skills';
+import Projects from '@/components/Projects/Projects';
+import Experience from '@/components/Experience/Experience';
+import Contact from '@/components/Contact/Contact';
 
 export const metadata: Metadata = {
-  title: "AI Tool - Next.js Template for AI Tools",
-  description: "This is Home for AI Tool",
-  // other metadata
+  title: 'Joshua Silva — Full Stack Developer | Building Digital Universes',
+  description:
+    'Cinematic interstellar portfolio. Full-stack developer specialising in React, Next.js, TypeScript, Node.js, and immersive 3D web experiences. U.S. Army veteran.',
+  keywords: [
+    'Full Stack Developer',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Three.js',
+    'Portfolio',
+    'Interstellar',
+    '3D Web',
+  ],
 };
 
 export default function Home() {
   return (
-    <>
+    <main className='relative'>
       <Hero />
-      <Features />
-      <FeaturesList />
-      <Pricing />
-      <section className="relative z-20 overflow-hidden pb-20 pt-22.5 lg:pt-27.5 xl:pt-32.5 2xl:pt-45">
-        <Reviews />
-      </section>
-      <Clients />
-      <Support />
-      {integrations.isSanityEnabled && <BlogSection />}
-      <CallToAction />
-      <Newsletter />
-    </>
+      <About />
+      <Skills />
+      <Projects />
+      <Experience />
+      <Contact />
+    </main>
   );
 }
