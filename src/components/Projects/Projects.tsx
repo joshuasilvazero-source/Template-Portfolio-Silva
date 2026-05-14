@@ -10,15 +10,15 @@ const PROJECTS = [
     mission: 'MISSION-01',
     title: 'Full Stack Job Tracker',
     description:
-      'End-to-end job application manager with real-time status dashboard, statistics, CSV export, and a polished UI. Full auth, PostgreSQL persistence, and serverless API.',
+      'End-to-end job application manager with real-time status dashboard, statistics, CSV export, and a polished UI. Full auth, persistence, and serverless API.',
     accent:   '#00e5ff',
     glow:     'rgba(0,229,255,0.18)',
     gradient: 'from-cyan-950/70 via-blue-950/50 to-transparent',
     tag:      'FULL STACK',
     tagColor: 'text-cyan-400 border-cyan-400/30 bg-cyan-400/5',
-    stack:    ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Tailwind'],
-    github:   'https://github.com/joshuasilvazero',
-    live:     'https://example.com',
+    stack:    ['React', 'Node.js', 'JavaScript', 'MongoDB', 'CSS'],
+    github:   'https://github.com/joshuasilvazero-source/job-tracker-website-silva',
+    live:     'https://job-tracker-website-silva-2w5d.vercel.app/',
     featured: true,
   },
   {
@@ -26,45 +26,75 @@ const PROJECTS = [
     mission: 'MISSION-02',
     title: 'Warriors Blood Coffee',
     description:
-      'E-commerce storefront for a veteran-owned premium coffee brand. Full Stripe checkout, order management, admin dashboard, and JWT authentication.',
+      'E-commerce storefront for a veteran-owned premium coffee brand. Features product catalog, cart system, and a bold brand identity built for impact.',
     accent:   '#f97316',
     glow:     'rgba(249,115,22,0.18)',
     gradient: 'from-orange-950/70 via-red-950/50 to-transparent',
     tag:      'E-COMMERCE',
     tagColor: 'text-orange-400 border-orange-400/30 bg-orange-400/5',
-    stack:    ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT Auth'],
-    github:   'https://github.com/joshuasilvazero',
-    live:     'https://example.com',
+    stack:    ['React', 'Node.js', 'JavaScript', 'HTML', 'CSS'],
+    github:   'https://github.com/joshuasilvazero-source/warriors-blood-coffee-silva',
+    live:     '',
+  },
+  {
+    id: 'beans-place',
+    mission: 'MISSION-03',
+    title: 'The Beans Place',
+    description:
+      'Modern café website with a clean menu layout, location info, and an inviting brand experience. Deployed live on Vercel.',
+    accent:   '#f59e0b',
+    glow:     'rgba(245,158,11,0.18)',
+    gradient: 'from-amber-950/70 via-yellow-950/50 to-transparent',
+    tag:      'FRONTEND',
+    tagColor: 'text-amber-400 border-amber-400/30 bg-amber-400/5',
+    stack:    ['JavaScript', 'React', 'HTML', 'CSS'],
+    github:   'https://github.com/joshuasilvazero-source/the-beans-place-Silva',
+    live:     'https://the-beans-place-silva.vercel.app',
+  },
+  {
+    id: 'vintage-salon',
+    mission: 'MISSION-04',
+    title: 'Vintage Salon Shop',
+    description:
+      'Elegant salon storefront with service listings, a vintage aesthetic, and a responsive layout optimized for local business discovery. Live on Vercel.',
+    accent:   '#ec4899',
+    glow:     'rgba(236,72,153,0.18)',
+    gradient: 'from-pink-950/70 via-rose-950/50 to-transparent',
+    tag:      'FRONTEND',
+    tagColor: 'text-pink-400 border-pink-400/30 bg-pink-400/5',
+    stack:    ['JavaScript', 'React', 'HTML', 'CSS'],
+    github:   'https://github.com/joshuasilvazero-source/Vintage-Salon-Shop',
+    live:     'https://vintage-salon-shop.vercel.app',
   },
   {
     id: 'landscaping',
-    mission: 'MISSION-03',
-    title: 'Landscaping Booking Site',
+    mission: 'MISSION-05',
+    title: 'Landscaping Website',
     description:
-      'Premium responsive marketing site with service showcase, photo gallery, and automated email contact form with Nodemailer notifications.',
+      'Premium responsive marketing site with service showcase, photo gallery, and contact form. Deployed live on Vercel.',
     accent:   '#4ade80',
     glow:     'rgba(74,222,128,0.18)',
     gradient: 'from-green-950/70 via-emerald-950/50 to-transparent',
     tag:      'FRONTEND',
     tagColor: 'text-green-400 border-green-400/30 bg-green-400/5',
-    stack:    ['Next.js', 'React', 'Tailwind CSS', 'Nodemailer'],
-    github:   'https://github.com/joshuasilvazero',
-    live:     'https://example.com',
+    stack:    ['HTML', 'CSS', 'JavaScript'],
+    github:   'https://github.com/joshuasilvazero-source/Landscaping-website-Silva',
+    live:     'https://landscaping-website-silva.vercel.app',
   },
   {
     id: 'portfolio',
-    mission: 'MISSION-04',
+    mission: 'MISSION-06',
     title: 'Developer Portfolio Platform',
     description:
-      'This very portfolio — a cinematic interstellar experience with Three.js galaxy, interactive black hole, runner game gate, and premium animations.',
+      'This very portfolio — a cinematic interstellar experience with Three.js galaxy, interactive black hole, runner game gate, and premium animations. Live on Vercel.',
     accent:   '#a855f7',
     glow:     'rgba(168,85,247,0.18)',
     gradient: 'from-purple-950/70 via-violet-950/50 to-transparent',
     tag:      'CREATIVE',
     tagColor: 'text-purple-400 border-purple-400/30 bg-purple-400/5',
     stack:    ['Next.js', 'Three.js', 'Framer Motion', 'TypeScript', 'Tailwind'],
-    github:   'https://github.com/joshuasilvazero',
-    live:     'https://example.com',
+    github:   'https://github.com/joshuasilvazero-source/portfolio-silva-dev',
+    live:     'https://silva-joshua-dev.lovable.app',
   },
 ];
 
@@ -214,24 +244,26 @@ function ProjectCard({
                 Source
               </motion.a>
 
-              <motion.a
-                href={project.live}
-                target='_blank'
-                rel='noopener noreferrer'
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border px-4 py-2 font-mono text-[11px] font-bold transition-all hover:opacity-90'
-                style={{
-                  borderColor: `${project.accent}35`,
-                  color: project.accent,
-                  background: `${project.accent}10`,
-                }}
-              >
-                <svg className='h-3 w-3' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
-                </svg>
-                Live Demo
-              </motion.a>
+              {project.live && (
+                <motion.a
+                  href={project.live}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className='flex flex-1 items-center justify-center gap-1.5 rounded-lg border px-4 py-2 font-mono text-[11px] font-bold transition-all hover:opacity-90'
+                  style={{
+                    borderColor: `${project.accent}35`,
+                    color: project.accent,
+                    background: `${project.accent}10`,
+                  }}
+                >
+                  <svg className='h-3 w-3' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+                  </svg>
+                  Live Demo
+                </motion.a>
+              )}
             </div>
           </div>
         </div>
@@ -287,7 +319,7 @@ const Projects: React.FC = () => (
         className='mt-10 text-center'
       >
         <a
-          href='https://github.com/joshuasilvazero'
+          href='https://github.com/joshuasilvazero-source'
           target='_blank'
           rel='noopener noreferrer'
           className='inline-flex items-center gap-2 font-mono text-sm text-gray-500 transition-colors hover:text-cyan-400'

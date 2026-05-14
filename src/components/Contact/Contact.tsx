@@ -15,7 +15,7 @@ function BlinkCursor() {
   }, []);
   return (
     <span
-      className='ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[1px] bg-cyan-400'
+      className='ml-0.5 inline-block h-[0.9em] w-0.5 translate-y-px bg-cyan-400'
       style={{ opacity: on ? 1 : 0, transition: 'opacity 0.05s' }}
     />
   );
@@ -85,13 +85,14 @@ const Contact: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
+      const data = await res.json();
       if (res.ok) {
         setSent(true);
         toast.success('Transmission received — I\'ll respond within 24h.');
         setForm({ name: '', email: '', message: '' });
         setTimeout(() => setSent(false), 4000);
       } else {
-        toast.error('Transmission failed — please retry.');
+        toast.error(data.error ?? 'Transmission failed — please retry.');
       }
     } catch {
       toast.error('Network error — please retry.');
@@ -279,8 +280,8 @@ const Contact: React.FC = () => {
             />
             <ContactLink
               label='GitHub'
-              value='github.com/joshuasilvazero'
-              href='https://github.com/joshuasilvazero'
+              value='github.com/joshuasilvazero-source'
+              href='https://github.com/joshuasilvazero-source'
               accent='#818cf8'
               icon={
                 <svg className='h-4 w-4' viewBox='0 0 24 24' fill='currentColor'>
@@ -290,8 +291,8 @@ const Contact: React.FC = () => {
             />
             <ContactLink
               label='LinkedIn'
-              value='linkedin.com/in/joshuasilvacolon'
-              href='https://linkedin.com/in/joshuasilvacolon'
+              value='linkedin.com/in/joshua-silva-14027026a'
+              href='https://www.linkedin.com/in/joshua-silva-14027026a/'
               accent='#2dd4bf'
               icon={
                 <svg className='h-4 w-4' viewBox='0 0 24 24' fill='currentColor'>

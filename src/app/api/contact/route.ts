@@ -1,120 +1,85 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Validate email format
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
+const validateEmail = (email: string): boolean =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-// Create transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;',
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, message } = body;
+    const { name, email, message } = await request.json();
 
-    // Validation
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 },
-      );
-    }
+    if (!name || !email || !message)
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
 
-    if (!validateEmail(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 },
-      );
-    }
+    if (!validateEmail(email))
+      return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
 
-    if (message.length < 10) {
-      return NextResponse.json(
-        { error: 'Message must be at least 10 characters' },
-        { status: 400 },
-      );
-    }
+    if (message.length < 10)
+      return NextResponse.json({ error: 'Message too short' }, { status: 400 });
 
-    // Send email
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+    const user = process.env.EMAIL_USER;
+    const pass = process.env.EMAIL_PASSWORD;
+
+    if (!user || !pass)
+      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+
+    // Create transporter inside handler so env vars are always resolved
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: { user, pass },
+    });
+
+    // Email to you
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${user}>`,
+      to: user,
       replyTo: email,
-      subject: `New Portfolio Message from ${name}`,
+      subject: `New message from ${name}`,
       html: `
-        <div style="font-family: Courier New, monospace; color: #0a0e27;">
-          <h2 style="color: #00ffff;">New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <hr style="border-color: #00ffff; opacity: 0.3;">
-          <p><strong>Message:</strong></p>
-          <pre style="background-color: #1a1f3a; padding: 10px; border-radius: 5px; overflow-x: auto;">
-${escapeHtml(message)}
-          </pre>
-          <hr style="border-color: #00ffff; opacity: 0.3;">
-          <p style="color: #999; font-size: 12px;">
-            Reply directly to this email to contact ${escapeHtml(name)}
-          </p>
+        <div style="font-family:monospace;background:#0a0e17;color:#e2e8f0;padding:24px;border-radius:8px">
+          <h2 style="color:#00e5ff;margin:0 0 16px">New Portfolio Transmission</h2>
+          <p><span style="color:#94a3b8">From:</span> ${escapeHtml(name)}</p>
+          <p><span style="color:#94a3b8">Email:</span> ${escapeHtml(email)}</p>
+          <hr style="border-color:#1e293b;margin:16px 0">
+          <p style="color:#94a3b8;margin-bottom:8px">Message:</p>
+          <pre style="background:#1e293b;padding:12px;border-radius:6px;white-space:pre-wrap">${escapeHtml(message)}</pre>
+          <p style="color:#64748b;font-size:12px;margin-top:16px">Hit reply to respond directly to ${escapeHtml(name)}</p>
         </div>
       `,
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
-
-    // Send confirmation email to user
-    const confirmationEmail = {
-      from: process.env.EMAIL_USER,
+    // Auto-reply to sender
+    await transporter.sendMail({
+      from: `"Joshua Silva" <${user}>`,
       to: email,
-      subject: 'Thanks for reaching out! - Joshua Silva',
+      subject: 'Message received — Joshua Silva',
       html: `
-        <div style="font-family: Courier New, monospace; color: #0a0e27;">
-          <h2 style="color: #00ffff;">Thanks for Your Message!</h2>
+        <div style="font-family:monospace;background:#0a0e17;color:#e2e8f0;padding:24px;border-radius:8px">
+          <h2 style="color:#00e5ff;margin:0 0 16px">Transmission Received</h2>
           <p>Hi ${escapeHtml(name)},</p>
-          <p>I received your message and will get back to you as soon as possible.</p>
-          <hr style="border-color: #00ffff; opacity: 0.3;">
-          <p style="color: #999; font-size: 12px;">
-            This is an automated response. The actual message was:
-          </p>
-          <pre style="background-color: #1a1f3a; padding: 10px; border-radius: 5px; overflow-x: auto; color: #00ffff;">
-${escapeHtml(message)}
-          </pre>
-          <hr style="border-color: #00ffff; opacity: 0.3;">
-          <p>Best regards,<br/>Joshua Silva</p>
+          <p>Got your message — I'll get back to you within 24 hours.</p>
+          <hr style="border-color:#1e293b;margin:16px 0">
+          <p style="color:#64748b;font-size:12px">Your message:</p>
+          <pre style="background:#1e293b;padding:12px;border-radius:6px;color:#94a3b8;white-space:pre-wrap">${escapeHtml(message)}</pre>
+          <p style="margin-top:16px">— Joshua Silva<br><span style="color:#00e5ff">Full Stack Developer</span></p>
         </div>
       `,
-    };
+    });
 
-    await transporter.sendMail(confirmationEmail);
+    return NextResponse.json({ success: true }, { status: 200 });
 
-    return NextResponse.json(
-      { success: true, message: 'Email sent successfully' },
-      { status: 200 },
-    );
   } catch (error) {
-    console.error('Contact form error:', error);
-    return NextResponse.json(
-      { error: 'Failed to send email' },
-      { status: 500 },
-    );
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Contact form error:', message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-}
-
-// Helper function to escape HTML
-function escapeHtml(text: string): string {
-  const map: { [key: string]: string } = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
-  };
-  return text.replace(/[&<>"']/g, (m) => map[m]);
 }
