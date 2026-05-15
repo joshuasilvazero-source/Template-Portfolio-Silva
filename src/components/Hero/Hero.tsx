@@ -4,11 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const HEADLINE_1  = 'Full Stack Developer';
-const HEADLINE_2  = 'Building Digital Universes';
+const HEADLINE_1  = 'Software Engineer';
+const HEADLINE_2  = 'Precision. Scale. Impact.';
 const SUBHEADLINE =
-  'Full-stack developer specializing in scalable systems, immersive 3D experiences, ' +
-  'and high-performance web applications.';
+  'Military-trained discipline applied to full-stack engineering. ' +
+  'I design and ship production-grade web applications — from immersive 3D interfaces ' +
+  'to distributed backend systems — built to perform under real-world load.';
 
 const STACK = [
   'React', 'Next.js', 'TypeScript', 'Node.js', 'Three.js', 'PostgreSQL',
@@ -185,7 +186,7 @@ const Hero: React.FC = () => {
             >
               <Image
                 src='/images/hero/profile.jpg'
-                alt='Joshua Silva — Full Stack Developer'
+                alt='Joshua Silva — Software Engineer'
                 fill
                 sizes='(max-width: 640px) 240px, (max-width: 768px) 256px, 320px'
                 className='object-cover object-top'
@@ -208,7 +209,7 @@ const Hero: React.FC = () => {
               transition={{ delay: 1.2 }}
               className='absolute -bottom-7 left-0 right-0 text-center font-mono text-[9px] uppercase tracking-[0.25em] text-cyan-400/40'
             >
-              J. Silva · Full Stack Dev
+              J. Silva · SWE · US Army
             </motion.p>
           </motion.div>
 
