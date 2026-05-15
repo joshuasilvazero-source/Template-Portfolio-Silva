@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LogoSvg } from '@/components/Logo/LogoSvg';
+import { useGameStore } from '@/utils/gameStore';
 
 const NAV = [
   { label: 'About',      href: '#about',      code: 'A1' },
@@ -16,6 +17,7 @@ const Navbar: React.FC = () => {
   const [isOpen,     setIsOpen]     = useState(false);
   const [scrolled,   setScrolled]   = useState(false);
   const [activeHash, setActiveHash] = useState('');
+  const { showReplayBtn, setReplayRequested } = useGameStore();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -72,7 +74,7 @@ const Navbar: React.FC = () => {
             <div className='hidden flex-col sm:flex'>
               <span className='font-mono text-sm font-bold leading-tight text-white'>Joshua Silva</span>
               <span className='font-mono text-[10px] leading-tight text-cyan-400/55 tracking-wider'>
-                Full Stack Developer
+                Software Engineer
               </span>
             </div>
           </motion.a>
@@ -136,6 +138,29 @@ const Navbar: React.FC = () => {
             >
               Hire Me
             </motion.a>
+
+            {/* Replay Game — only shown after winning */}
+            <AnimatePresence>
+              {showReplayBtn && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.25 }}
+                  onClick={() => setReplayRequested(true)}
+                  title='Replay Game'
+                  className='group relative ml-1.5 flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/25 bg-cyan-400/8 text-cyan-400 transition-all duration-200 hover:border-cyan-400/50 hover:bg-cyan-400/15'
+                >
+                  <svg className='h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' />
+                  </svg>
+                  {/* Tooltip */}
+                  <span className='pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-black/80 px-2 py-0.5 font-mono text-[9px] text-cyan-400 opacity-0 transition-opacity group-hover:opacity-100'>
+                    Replay
+                  </span>
+                </motion.button>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* ── Mobile hamburger ── */}
@@ -192,6 +217,18 @@ const Navbar: React.FC = () => {
                 >
                   Hire Me
                 </a>
+
+                {showReplayBtn && (
+                  <button
+                    onClick={() => { setReplayRequested(true); setIsOpen(false); }}
+                    className='mt-1 flex w-full items-center justify-center gap-2 rounded-lg border border-cyan-400/20 py-2.5 font-mono text-sm text-cyan-400 transition-colors hover:bg-cyan-400/8'
+                  >
+                    <svg className='h-3.5 w-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                      <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' />
+                    </svg>
+                    Replay Game
+                  </button>
+                )}
               </div>
             </motion.div>
           )}

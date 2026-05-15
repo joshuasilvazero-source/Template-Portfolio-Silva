@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
             </div>
             <div>
               <p className='font-mono text-sm font-bold text-white'>Joshua Silva</p>
-              <p className='font-mono text-[10px] text-gray-500'>Full Stack Developer</p>
+              <p className='font-mono text-[10px] text-gray-500'>Software Engineer</p>
             </div>
           </div>
 
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div>
                   <p className='font-mono text-sm font-bold text-white'>Joshua Silva</p>
-                  <p className='font-mono text-[10px] text-gray-500'>Full Stack Developer</p>
+                  <p className='font-mono text-[10px] text-gray-500'>Software Engineer</p>
                 </div>
               </div>
               <p className='mb-4 max-w-xs font-mono text-xs leading-relaxed text-gray-500'>

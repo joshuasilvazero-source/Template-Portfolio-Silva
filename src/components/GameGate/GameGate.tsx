@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { RunnerGame } from '@/components/RunnerGame/RunnerGame';
 import { motion } from 'framer-motion';
 import { LogoSvg } from '@/components/Logo/LogoSvg';
+import { useGameStore } from '@/utils/gameStore';
 
 interface GameGateProps {
   children: React.ReactNode;
@@ -12,28 +13,32 @@ interface GameGateProps {
 export const GameGate: React.FC<GameGateProps> = ({ children }) => {
   const [gameUnlocked, setGameUnlocked] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showReplay, setShowReplay] = useState(false);
+
+  const { setShowReplayBtn, replayRequested, setReplayRequested } = useGameStore();
 
   useEffect(() => {
-    // Check localStorage for game unlock state
     const isUnlocked = localStorage.getItem('gameUnlocked');
     if (isUnlocked === 'true') {
       setGameUnlocked(true);
+      setShowReplayBtn(true);
     }
     setLoading(false);
-  }, []);
+  }, [setShowReplayBtn]);
+
+  // React to replay request from Navbar
+  useEffect(() => {
+    if (replayRequested) {
+      localStorage.removeItem('gameUnlocked');
+      setGameUnlocked(false);
+      setShowReplayBtn(false);
+      setReplayRequested(false);
+    }
+  }, [replayRequested, setShowReplayBtn, setReplayRequested]);
 
   const handleGameWon = () => {
     localStorage.setItem('gameUnlocked', 'true');
-    setShowReplay(true);
-    // Delay unlock so the ACCESS GRANTED overlay plays out
+    setShowReplayBtn(true);
     setTimeout(() => setGameUnlocked(true), 2600);
-  };
-
-  const handleReplay = () => {
-    localStorage.removeItem('gameUnlocked');
-    setGameUnlocked(false);
-    setShowReplay(false);
   };
 
   if (loading) {
@@ -80,7 +85,7 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
             </h1>
 
             <p className='mb-2 font-mono text-lg text-green-400'>
-              Full Stack Developer | Digital Universe
+              Software Engineer · U.S. Army Veteran
             </p>
 
             <p className='font-mono text-sm text-cyan-400/70'>
@@ -116,28 +121,6 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
     );
   }
 
-  // Game unlocked - show portfolio with replay option
-  return (
-    <>
-      {children}
-
-      {showReplay && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className='fixed right-4 bottom-4 z-50 sm:right-8 sm:bottom-8'
-        >
-          <button
-            onClick={handleReplay}
-            className='rounded-lg bg-linear-to-r from-cyan-500 to-purple-500 px-6 py-3 font-mono font-bold text-white transition-all hover:shadow-lg'
-            style={{
-              boxShadow: '0 0 20px rgba(0, 255, 255, 0.4)',
-            }}
-          >
-            ↻ Replay Game
-          </button>
-        </motion.div>
-      )}
-    </>
-  );
+  // Game unlocked — replay button lives in the Navbar
+  return <>{children}</>;
 };

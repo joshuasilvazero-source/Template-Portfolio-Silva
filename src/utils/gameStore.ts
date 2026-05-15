@@ -13,6 +13,8 @@ export interface GameState {
   spawnCounter: number;
   difficulty: number;
   gameUnlocked: boolean;
+  showReplayBtn: boolean;
+  replayRequested: boolean;
 
   // Actions
   setScore: (score: number) => void;
@@ -23,6 +25,8 @@ export interface GameState {
   setSpawnCounter: (counter: number) => void;
   setDifficulty: (difficulty: number) => void;
   setGameUnlocked: (unlocked: boolean) => void;
+  setShowReplayBtn: (v: boolean) => void;
+  setReplayRequested: (v: boolean) => void;
   resetGame: () => void;
 }
 
@@ -40,6 +44,8 @@ export const useGameStore = create<GameState>((set) => ({
   spawnCounter: 0,
   difficulty: 1,
   gameUnlocked: false,
+  showReplayBtn: false,
+  replayRequested: false,
 
   setScore: (score) => set({ score }),
   setGameState: (gameState) => set({ gameState }),
@@ -54,6 +60,8 @@ export const useGameStore = create<GameState>((set) => ({
       localStorage.setItem('gameUnlocked', JSON.stringify(gameUnlocked));
     }
   },
+  setShowReplayBtn: (showReplayBtn) => set({ showReplayBtn }),
+  setReplayRequested: (replayRequested) => set({ replayRequested }),
 
   resetGame: () =>
     set({
