@@ -41,7 +41,7 @@ export default function RootLayout({
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta charSet='utf-8' />
       </head>
-      <body suppressHydrationWarning className='bg-[#0a0e27] overflow-x-hidden'>
+      <body suppressHydrationWarning className='bg-[#0a0e27] overflow-x-clip'>
         {children}
       </body>
     </html>

@@ -196,7 +196,14 @@ const Navbar: React.FC = () => {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsOpen(false);
+                      const id = item.href.replace('#', '');
+                      setTimeout(() => {
+                        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                      }, 250);
+                    }}
                     className={`flex items-center justify-between rounded-md px-4 py-2.5 font-mono text-sm transition-colors ${
                       activeHash === item.href
                         ? 'bg-cyan-400/8 text-cyan-400'
@@ -211,7 +218,13 @@ const Navbar: React.FC = () => {
                 ))}
                 <a
                   href='#contact'
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 250);
+                  }}
                   className='mt-2 block rounded-lg py-2.5 text-center font-mono text-sm font-bold text-black'
                   style={{ background: 'linear-gradient(135deg, #00e5ff, #0ea5e9)' }}
                 >
