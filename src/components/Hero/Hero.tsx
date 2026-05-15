@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const HEADLINE_1  = 'Software Engineer';
+const HEADLINE_1  = 'Full-Stack Engineer';
 const HEADLINE_2  = 'Precision. Scale. Impact.';
 const SUBHEADLINE =
-  'Military-trained discipline applied to full-stack engineering. ' +
-  'I design and ship production-grade web applications — from immersive 3D interfaces ' +
-  'to distributed backend systems — built to perform under real-world load.';
+  'I design and ship high-performance web applications — from immersive 3D interfaces ' +
+  'to distributed backend systems. Scalable by design, clean in execution. ' +
+  'U.S. Army veteran.';
 
 const STACK = [
   'React', 'Next.js', 'TypeScript', 'Node.js', 'Three.js', 'PostgreSQL',
