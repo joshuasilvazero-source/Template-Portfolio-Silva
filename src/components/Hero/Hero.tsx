@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const HEADLINE_1  = 'Full-Stack Engineer';
-const HEADLINE_2  = 'Precision. Scale. Impact.';
+const HEADLINE_2  = 'End-to-End. Production-Ready.';
 const SUBHEADLINE =
-  'I design and ship high-performance web applications — from immersive 3D interfaces ' +
-  'to distributed backend systems. Scalable by design, clean in execution.';
+  'I architect and ship complete web products — from immersive Three.js frontends ' +
+  'to scalable Node.js backends. Strong systems thinking, clean execution, deployed and working.';
 
 const STACK = [
   'React', 'Next.js', 'TypeScript', 'Node.js', 'Three.js', 'PostgreSQL',
