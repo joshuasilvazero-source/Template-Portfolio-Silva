@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
   ].join(' ');
 
   return (
-    <section id='contact' className='relative scroll-mt-20 px-4 py-16 md:py-24'>
+    <section id='contact' className='relative scroll-mt-20 overflow-x-hidden px-4 py-16 md:py-24'>
       <div
         aria-hidden
         className='pointer-events-none absolute inset-x-0 top-0 h-px'
@@ -151,8 +151,8 @@ const Contact: React.FC = () => {
         <div className='grid gap-8 lg:grid-cols-[1fr_300px]'>
           {/* ── Form ── */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className='overflow-hidden rounded-2xl border border-white/8 bg-black/40 backdrop-blur-md'
@@ -261,8 +261,8 @@ const Contact: React.FC = () => {
 
           {/* ── Sidebar ── */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className='flex flex-col gap-3'
