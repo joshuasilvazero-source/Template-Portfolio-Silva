@@ -106,9 +106,9 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
             transition={{ duration: 1, delay: 0.5 }}
             className='mt-6 space-y-2 text-center font-mono text-[11px] text-gray-400 sm:mt-8 sm:text-xs'
           >
-            <p>Controls: SPACEBAR · CLICK · TAP</p>
+            <p>Move mouse · Drag finger · Fly through the gaps</p>
             <p className='text-cyan-400/50'>
-              Boost through asteroid gates · Reach 100 · Unlock portfolio
+              Score 50pts to unlock the portfolio
             </p>
           </motion.div>
         </div>
