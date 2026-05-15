@@ -165,7 +165,7 @@ function MissionEntry({ mission, i }: { mission: (typeof MISSIONS)[number]; i: n
 
 /* ── main component ───────────────────────────────────────────────── */
 const Experience: React.FC = () => (
-  <section id='experience' className='relative px-4 py-24'>
+  <section id='experience' className='relative scroll-mt-20 px-4 py-16 md:py-24'>
     <div
       aria-hidden
       className='pointer-events-none absolute inset-x-0 top-0 h-px'
@@ -179,12 +179,12 @@ const Experience: React.FC = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.55 }}
-        className='mb-16 text-center'
+        className='mb-10 text-center md:mb-16'
       >
         <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
           04 — Journey
         </p>
-        <h2 className='font-mono text-4xl font-black md:text-5xl'>
+        <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
           <span className='text-cyan-400'>Galactic</span>
           <span className='mx-2 text-white/25'>/</span>
           <span className='text-white'>Mission Log</span>

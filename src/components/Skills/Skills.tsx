@@ -140,7 +140,7 @@ function SkillModule({
 
 /* ── main component ───────────────────────────────────────────────── */
 const Skills: React.FC = () => (
-  <section id='skills' className='relative px-4 py-24'>
+  <section id='skills' className='relative scroll-mt-20 px-4 py-16 md:py-24'>
     {/* Top divider */}
     <div
       aria-hidden
@@ -155,12 +155,12 @@ const Skills: React.FC = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.55 }}
-        className='mb-16 text-center'
+        className='mb-10 text-center md:mb-16'
       >
         <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
           02 — Skills
         </p>
-        <h2 className='font-mono text-4xl font-black md:text-5xl'>
+        <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
           <span className='text-cyan-400'>System</span>
           <span className='mx-2 text-white/25'>/</span>
           <span className='text-white'>Modules</span>

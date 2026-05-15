@@ -124,7 +124,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id='home'
-      className='relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20 pb-16'
+      className='relative flex min-h-screen items-start justify-center overflow-x-hidden px-4 sm:px-6 pt-24 pb-16 md:items-center md:pt-24'
     >
       {/* radial backdrop glows */}
       <div
@@ -295,13 +295,13 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.62 }}
-              className='mb-8 flex flex-col items-center gap-3 sm:flex-row md:justify-start'
+              className='mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center md:justify-start'
             >
               <motion.a
                 href='#projects'
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className='rounded-lg px-7 py-3 font-mono text-sm font-bold text-black'
+                className='w-full rounded-lg px-7 py-3 text-center font-mono text-sm font-bold text-black sm:w-auto'
                 style={{
                   background: 'linear-gradient(135deg, #00e5ff, #0ea5e9)',
                   boxShadow: '0 0 24px rgba(0,229,255,0.32), 0 4px 16px rgba(0,0,0,0.4)',
@@ -314,7 +314,7 @@ const Hero: React.FC = () => {
                 href='#contact'
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className='rounded-lg border border-cyan-400/35 bg-cyan-400/5 px-7 py-3 font-mono text-sm font-bold text-cyan-400 backdrop-blur-sm transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10'
+                className='w-full rounded-lg border border-cyan-400/35 bg-cyan-400/5 px-7 py-3 text-center font-mono text-sm font-bold text-cyan-400 backdrop-blur-sm transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10 sm:w-auto'
               >
                 Contact
               </motion.a>
@@ -323,7 +323,7 @@ const Hero: React.FC = () => {
                 href='#about'
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className='rounded-lg border border-white/10 bg-white/3 px-7 py-3 font-mono text-sm font-bold text-white/65 backdrop-blur-sm transition-colors hover:border-white/20 hover:text-white/80'
+                className='w-full rounded-lg border border-white/10 bg-white/3 px-7 py-3 text-center font-mono text-sm font-bold text-white/65 backdrop-blur-sm transition-colors hover:border-white/20 hover:text-white/80 sm:w-auto'
               >
                 About
               </motion.a>
@@ -333,7 +333,7 @@ const Hero: React.FC = () => {
                 download='Joshua_Silva_Resume.pdf'
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className='flex items-center gap-2 rounded-lg border border-indigo-400/35 bg-indigo-400/5 px-7 py-3 font-mono text-sm font-bold text-indigo-400 backdrop-blur-sm transition-colors hover:border-indigo-400/60 hover:bg-indigo-400/10'
+                className='flex w-full items-center justify-center gap-2 rounded-lg border border-indigo-400/35 bg-indigo-400/5 px-7 py-3 font-mono text-sm font-bold text-indigo-400 backdrop-blur-sm transition-colors hover:border-indigo-400/60 hover:bg-indigo-400/10 sm:w-auto sm:justify-start'
               >
                 <svg className='h-3.5 w-3.5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4' />

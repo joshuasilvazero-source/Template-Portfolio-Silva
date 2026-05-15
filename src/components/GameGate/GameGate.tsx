@@ -104,11 +104,11 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className='mt-8 space-y-2 text-center font-mono text-xs text-gray-400'
+            className='mt-6 space-y-2 text-center font-mono text-[11px] text-gray-400 sm:mt-8 sm:text-xs'
           >
-            <p>Controls: SPACEBAR • MOUSE CLICK • MOBILE TAP</p>
+            <p>Controls: SPACEBAR · CLICK · TAP</p>
             <p className='text-cyan-400/50'>
-              Jump over obstacles • Reach score 100 • Unlock portfolio
+              Boost through asteroid gates · Reach 100 · Unlock portfolio
             </p>
           </motion.div>
         </div>
@@ -125,7 +125,7 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className='fixed right-8 bottom-8 z-50'
+          className='fixed right-4 bottom-4 z-50 sm:right-8 sm:bottom-8'
         >
           <button
             onClick={handleReplay}

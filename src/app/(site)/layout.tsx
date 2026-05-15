@@ -61,7 +61,7 @@ export default function SiteLayout({
 
       <LoadingScreen />
 
-      <div className='relative isolate'>
+      <div className='relative isolate overflow-x-hidden'>
         <ThreeBackground />
 
         {/* Subtle global scanline */}

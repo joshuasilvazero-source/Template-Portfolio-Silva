@@ -45,15 +45,15 @@ const Pricing = () => {
         </div>
 
         {/* <!-- grid row --> */}
-        <div className="relative -z-1 flex justify-center gap-7.5">
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
-          <div className="pricing-grid pricing-grid-border relative h-[250px] w-full max-w-[50px]"></div>
+        <div className="relative -z-1 hidden justify-center gap-7.5 sm:flex">
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
+          <div className="pricing-grid pricing-grid-border relative h-[150px] w-full max-w-[50px] sm:h-[250px]"></div>
         </div>
 
         <PricingGrids />

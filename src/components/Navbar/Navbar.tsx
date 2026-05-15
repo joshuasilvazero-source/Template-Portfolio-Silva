@@ -37,8 +37,8 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-white/[0.07] bg-black/70 backdrop-blur-xl'
+        scrolled || isOpen
+          ? 'border-b border-white/[0.07] bg-black/90 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
     >

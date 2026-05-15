@@ -44,7 +44,7 @@ function ContactLink({
       className='group flex items-center gap-4 rounded-xl border border-white/8 bg-white/2 p-4 backdrop-blur-sm transition-all duration-200 hover:border-white/15 hover:bg-white/4'
     >
       <div
-        className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-200'
+        className='flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border transition-all duration-200'
         style={{ borderColor: `${accent}30`, background: `${accent}10` }}
       >
         <span style={{ color: accent }}>{icon}</span>
@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
   ].join(' ');
 
   return (
-    <section id='contact' className='relative px-4 py-24'>
+    <section id='contact' className='relative scroll-mt-20 px-4 py-16 md:py-24'>
       <div
         aria-hidden
         className='pointer-events-none absolute inset-x-0 top-0 h-px'
@@ -129,7 +129,7 @@ const Contact: React.FC = () => {
           <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
             05 — Contact
           </p>
-          <h2 className='font-mono text-4xl font-black md:text-5xl'>
+          <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
             <span className='text-cyan-400'>Transmission</span>
             <span className='mx-2 text-white/25'>/</span>
             <span className='text-white'>Center</span>

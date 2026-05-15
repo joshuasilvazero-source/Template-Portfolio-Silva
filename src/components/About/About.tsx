@@ -83,12 +83,12 @@ function SectionLabel({ n, title }: { n: string; title: string }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55 }}
-      className='mb-16 text-center'
+      className='mb-10 text-center md:mb-16'
     >
       <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
         {n} — {title}
       </p>
-      <h2 className='font-mono text-4xl font-black md:text-5xl'>
+      <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
         <span className='text-cyan-400'>Mission</span>
         <span className='mx-2 text-white/25'>/</span>
         <span className='text-white'>Brief</span>
@@ -144,7 +144,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id='about' className='relative px-4 py-24'>
+    <section id='about' className='relative scroll-mt-20 px-4 py-16 md:py-24'>
       {/* Section glow */}
       <div
         aria-hidden
@@ -186,7 +186,7 @@ const About: React.FC = () => {
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
-                    className={`font-mono text-[11px] leading-relaxed ${line.color}`}
+                    className={`font-mono text-[10px] leading-relaxed break-words sm:text-[11px] ${line.color}`}
                   >
                     {line.text}
                   </motion.p>
