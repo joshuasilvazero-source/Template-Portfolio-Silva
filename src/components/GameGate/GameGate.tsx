@@ -51,7 +51,7 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
 
   if (!gameUnlocked) {
     return (
-      <div className='flex min-h-screen flex-col items-center justify-center bg-linear-to-br from-[#0a0e27] to-[#1a1f3a] p-4'>
+      <div className='fixed inset-0 z-100 flex flex-col items-center justify-center overflow-y-auto bg-linear-to-br from-[#0a0e27] to-[#1a1f3a] p-4'>
         {/* Background effects */}
         <div className='pointer-events-none fixed inset-0 overflow-hidden'>
           <div className='absolute top-0 right-0 h-96 w-96 rounded-full bg-cyan-400/5 blur-3xl' />
@@ -63,7 +63,7 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className='mb-12 text-center'
+            className='mb-4 text-center sm:mb-8'
           >
             <div className='mb-8 flex justify-center'>
               <motion.div
@@ -92,7 +92,7 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className='rounded-2xl border border-cyan-400/30 bg-black/40 p-8 shadow-2xl backdrop-blur-md'
+            className='rounded-2xl border border-cyan-400/30 bg-black/40 p-3 shadow-2xl backdrop-blur-md sm:p-8'
             style={{
               boxShadow: '0 0 30px rgba(0, 255, 255, 0.2)',
             }}

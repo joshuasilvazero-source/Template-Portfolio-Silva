@@ -200,9 +200,10 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: Particle) {
 }
 
 // ── Draw: HUD ────────────────────────────────────────────────────────────────
-function drawHUD(ctx: CanvasRenderingContext2D, score: number, lives: number) {
+function drawHUD(ctx: CanvasRenderingContext2D, score: number, lives: number, scale: number) {
+  const sf = (px: number, min = 7) => Math.round(Math.max(min / scale, px));
   ctx.save();
-  ctx.font = 'bold 13px monospace';
+  ctx.font = `bold ${sf(13, 9)}px monospace`;
   ctx.shadowColor = '#00ffff'; ctx.shadowBlur = 8;
   ctx.fillStyle = '#00ffff'; ctx.textAlign = 'left';
   ctx.fillText(`SCORE: ${score}`, 12, 24);
@@ -218,7 +219,7 @@ function drawHUD(ctx: CanvasRenderingContext2D, score: number, lives: number) {
   }
   ctx.shadowBlur = 0; ctx.strokeStyle = '#00ffff44'; ctx.lineWidth = 1;
   ctx.strokeRect(bX, bY, bW, bH);
-  ctx.font = '9px monospace'; ctx.fillStyle = '#00ffff66';
+  ctx.font = `${sf(9, 7)}px monospace`; ctx.fillStyle = '#00ffff66';
   ctx.fillText(`/${WIN_SCORE}`, bX + bW + 5, bY + 8);
 
   ctx.textAlign = 'right';
@@ -226,14 +227,15 @@ function drawHUD(ctx: CanvasRenderingContext2D, score: number, lives: number) {
     ctx.fillStyle = i < lives ? '#ff00ff' : '#330033';
     ctx.shadowColor = i < lives ? '#ff00ff' : 'transparent';
     ctx.shadowBlur = i < lives ? 8 : 0;
-    ctx.font = '14px monospace';
+    ctx.font = `${sf(14, 10)}px monospace`;
     ctx.fillText('♦', W - 12 - i * 20, 24);
   }
   ctx.restore();
 }
 
 // ── Draw: overlay ────────────────────────────────────────────────────────────
-function drawOverlay(ctx: CanvasRenderingContext2D, gs: GS, score: number, accessTimer: number) {
+function drawOverlay(ctx: CanvasRenderingContext2D, gs: GS, score: number, accessTimer: number, scale: number) {
+  const sf = (px: number, min = 8) => Math.round(Math.max(min / scale, px));
   ctx.save();
   ctx.fillStyle = 'rgba(5,8,20,0.82)'; ctx.fillRect(0, 0, W, H);
   ctx.textAlign = 'center';
@@ -245,26 +247,26 @@ function drawOverlay(ctx: CanvasRenderingContext2D, gs: GS, score: number, acces
       ctx.fillRect(0, y, W, 1);
     }
     ctx.globalAlpha = 1;
-    ctx.font = 'bold 30px monospace';
+    ctx.font = `bold ${sf(30, 16)}px monospace`;
     ctx.shadowColor = '#00ffff'; ctx.shadowBlur = 24;
     ctx.fillStyle = '#00ffff'; ctx.fillText('INTERSTELLAR RUNNER', cx, H / 2 - 50);
-    ctx.font = 'bold 13px monospace';
+    ctx.font = `bold ${sf(13, 9)}px monospace`;
     ctx.shadowColor = '#ff00ff'; ctx.shadowBlur = 12;
     ctx.fillStyle = '#ff00ff'; ctx.fillText('[ PRESS SPACE  /  CLICK  /  TAP ]', cx, H / 2);
-    ctx.font = '11px monospace';
+    ctx.font = `${sf(11, 8)}px monospace`;
     ctx.shadowBlur = 0; ctx.fillStyle = '#aaaaaa';
     ctx.fillText(`Reach score ${WIN_SCORE} to unlock the portfolio`, cx, H / 2 + 32);
-    ctx.font = '10px monospace'; ctx.fillStyle = '#00ffff55';
+    ctx.font = `${sf(10, 7)}px monospace`; ctx.fillStyle = '#00ffff55';
     ctx.fillText(`♦ ${LIVES_START} lives  •  3 obstacle types  •  speed scales with score`, cx, H / 2 + 52);
 
   } else if (gs === 'gameOver') {
-    ctx.font = 'bold 34px monospace';
+    ctx.font = `bold ${sf(34, 16)}px monospace`;
     ctx.shadowColor = '#ff0040'; ctx.shadowBlur = 28;
     ctx.fillStyle = '#ff0040'; ctx.fillText('ACCESS DENIED', cx, H / 2 - 45);
-    ctx.font = '16px monospace';
+    ctx.font = `${sf(16, 11)}px monospace`;
     ctx.shadowColor = '#00ffff'; ctx.shadowBlur = 8;
     ctx.fillStyle = '#00ffff'; ctx.fillText(`SCORE: ${score} / ${WIN_SCORE}`, cx, H / 2 - 5);
-    ctx.font = '13px monospace';
+    ctx.font = `${sf(13, 9)}px monospace`;
     ctx.shadowColor = '#ff00ff'; ctx.shadowBlur = 10;
     ctx.fillStyle = '#ff00ff'; ctx.fillText('[ RETRY: SPACE / CLICK / TAP ]', cx, H / 2 + 36);
 
@@ -276,13 +278,13 @@ function drawOverlay(ctx: CanvasRenderingContext2D, gs: GS, score: number, acces
       ctx.fillRect(0, y, W, 1);
     }
     ctx.globalAlpha = a;
-    ctx.font = 'bold 38px monospace';
+    ctx.font = `bold ${sf(38, 16)}px monospace`;
     ctx.shadowColor = '#00ff88'; ctx.shadowBlur = 36;
     ctx.fillStyle = '#00ff88'; ctx.fillText('ACCESS GRANTED', cx, H / 2 - 50);
-    ctx.font = '16px monospace';
+    ctx.font = `${sf(16, 11)}px monospace`;
     ctx.shadowColor = '#00ffff'; ctx.shadowBlur = 10;
     ctx.fillStyle = '#00ffff'; ctx.fillText(`FINAL SCORE: ${score}`, cx, H / 2);
-    ctx.font = '12px monospace';
+    ctx.font = `${sf(12, 9)}px monospace`;
     ctx.shadowBlur = 5; ctx.fillStyle = '#ffffff';
     ctx.fillText('PORTFOLIO UNLOCKING...', cx, H / 2 + 38);
     ctx.globalAlpha = 1;
@@ -292,6 +294,7 @@ function drawOverlay(ctx: CanvasRenderingContext2D, gs: GS, score: number, acces
 
 // ── Main draw ────────────────────────────────────────────────────────────────
 function draw(ctx: CanvasRenderingContext2D, s: GameState) {
+  const scale = Math.min(1, Math.max(0.1, (ctx.canvas.clientWidth || W) / W));
   const sky = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
   sky.addColorStop(0, '#050814'); sky.addColorStop(1, '#0c0820');
   ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
@@ -304,8 +307,8 @@ function draw(ctx: CanvasRenderingContext2D, s: GameState) {
   for (const p of s.particles) drawParticle(ctx, p);
   for (const o of s.obstacles) drawObstacle(ctx, o, s.frame);
   if (s.gs !== 'idle') drawPlayer(ctx, s.pY, s.frame, s.invincible);
-  if (s.gs === 'playing') drawHUD(ctx, s.score, s.lives);
-  if (s.gs !== 'playing') drawOverlay(ctx, s.gs, s.score, s.accessTimer);
+  if (s.gs === 'playing') drawHUD(ctx, s.score, s.lives, scale);
+  if (s.gs !== 'playing') drawOverlay(ctx, s.gs, s.score, s.accessTimer, scale);
 }
 
 // ── Component ────────────────────────────────────────────────────────────────
@@ -323,6 +326,11 @@ export const RunnerGame: React.FC<RunnerGameProps> = ({ onGameWon }) => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.scale(dpr, dpr);
 
     const makeState = (): GameState => ({
       gs: 'idle', score: 0,
