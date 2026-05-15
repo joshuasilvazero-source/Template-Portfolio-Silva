@@ -1,9 +1,9 @@
 const integrations = {
-  isSanityEnabled: true,
-  isStripeEnabled: true,
-  isOpenAIEnabled: true,
-  isMailchimpEnabled: true,
-  isAuthEnabled: true,
+  isSanityEnabled: false,
+  isStripeEnabled: false,
+  isOpenAIEnabled: false,
+  isMailchimpEnabled: false,
+  isAuthEnabled: false,
 };
 
 const messages = {
