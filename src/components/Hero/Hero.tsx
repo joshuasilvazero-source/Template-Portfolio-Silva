@@ -8,8 +8,7 @@ const HEADLINE_1  = 'Full-Stack Engineer';
 const HEADLINE_2  = 'Precision. Scale. Impact.';
 const SUBHEADLINE =
   'I design and ship high-performance web applications — from immersive 3D interfaces ' +
-  'to distributed backend systems. Scalable by design, clean in execution. ' +
-  'U.S. Army veteran.';
+  'to distributed backend systems. Scalable by design, clean in execution.';
 
 const STACK = [
   'React', 'Next.js', 'TypeScript', 'Node.js', 'Three.js', 'PostgreSQL',
