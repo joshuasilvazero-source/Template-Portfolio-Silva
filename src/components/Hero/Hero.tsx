@@ -124,7 +124,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id='home'
-      className='relative flex min-h-screen items-start justify-center overflow-x-hidden px-4 sm:px-6 pt-24 pb-16 md:items-center md:pt-24'
+      className='relative flex min-h-screen items-start justify-center overflow-x-clip px-4 sm:px-6 pt-24 pb-16 md:items-center md:pt-24'
     >
       {/* radial backdrop glows */}
       <div

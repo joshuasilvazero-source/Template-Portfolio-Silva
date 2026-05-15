@@ -25,7 +25,7 @@ export default function SiteLayout({
 }) {
   return (
     <div
-      className={`${spaceMono.className} min-h-screen overflow-x-hidden bg-[#000510] text-white`}
+      className={`${spaceMono.className} min-h-screen overflow-x-clip bg-[#000510] text-white`}
     >
       <style>{`
         @keyframes pulse-glow {
@@ -61,7 +61,7 @@ export default function SiteLayout({
 
       <LoadingScreen />
 
-      <div className='relative isolate overflow-x-hidden'>
+      <div className='relative isolate overflow-x-clip'>
         <ThreeBackground />
 
         {/* Subtle global scanline */}

@@ -201,8 +201,9 @@ const Navbar: React.FC = () => {
                       setIsOpen(false);
                       const id = item.href.replace('#', '');
                       setTimeout(() => {
-                        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-                      }, 250);
+                        const el = document.getElementById(id);
+                        if (el) window.scrollTo({ top: el.offsetTop - 64, behavior: 'smooth' });
+                      }, 280);
                     }}
                     className={`flex items-center justify-between rounded-md px-4 py-2.5 font-mono text-sm transition-colors ${
                       activeHash === item.href
@@ -222,8 +223,9 @@ const Navbar: React.FC = () => {
                     e.preventDefault();
                     setIsOpen(false);
                     setTimeout(() => {
-                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 250);
+                      const el = document.getElementById('contact');
+                      if (el) window.scrollTo({ top: el.offsetTop - 64, behavior: 'smooth' });
+                    }, 280);
                   }}
                   className='mt-2 block rounded-lg py-2.5 text-center font-mono text-sm font-bold text-black'
                   style={{ background: 'linear-gradient(135deg, #00e5ff, #0ea5e9)' }}

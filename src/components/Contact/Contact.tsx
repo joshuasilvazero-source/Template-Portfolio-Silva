@@ -136,7 +136,7 @@ const Contact: React.FC = () => {
   ].join(' ');
 
   return (
-    <section id='contact' className='relative scroll-mt-20 overflow-x-hidden px-4 py-16 md:py-24'>
+    <section id='contact' className='relative scroll-mt-20 overflow-x-clip px-4 py-16 md:py-24'>
       <div
         aria-hidden
         className='pointer-events-none absolute inset-x-0 top-0 h-px'
