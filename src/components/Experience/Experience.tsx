@@ -16,10 +16,10 @@ const MISSIONS = [
     icon:    '◈',
     accent:  'teal',
     description:
-      'Designing and building premium web applications for clients across various industries. End-to-end ownership — from architecture and API design to UI polish and deployment.',
+      'Designing and building premium web applications for clients across various industries. End-to-end ownership — from architecture and UI design to polished interfaces and deployment.',
     highlights: [
-      'React / Next.js', 'TypeScript', 'RESTful APIs',
-      'Database Design', 'Performance Optimisation', 'Client Relations',
+      'React / Next.js', 'TypeScript', 'UI/UX Design',
+      'Responsive Design', 'Performance Optimisation', 'Client Relations',
     ],
   },
   {

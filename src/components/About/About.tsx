@@ -11,7 +11,7 @@ const TERMINAL_LINES = [
   { text: '> ROLE      : Full Stack Developer',color: 'text-white',     delay: 1.1  },
   { text: '> BACKGROUND: U.S. Army Sergeant | 6 Years Active Duty',
                                               color: 'text-white',      delay: 1.4  },
-  { text: '> SPEC      : Full-Stack · React/Next.js · Node.js · UI/UX',
+  { text: '> SPEC      : Frontend · React/Next.js · TypeScript · UI/UX',
                                               color: 'text-white',      delay: 1.7  },
   { text: '> MISSION STATUS: [AVAILABLE_FOR_HIRE]',
                                               color: 'text-green-400',  delay: 2.1  },
@@ -134,8 +134,8 @@ const About: React.FC = () => {
       icon: '◎',
     },
     {
-      heading: 'Full Stack Specialist',
-      body: 'Specialising in React, Next.js, TypeScript, and Node.js — building scalable, performant applications with polished interfaces and clean, maintainable code.',
+      heading: 'Frontend Specialist',
+      body: 'Specialising in React, Next.js, TypeScript, and Three.js — building performant, visually compelling applications with polished interfaces and clean, maintainable code.',
       accent: 'text-indigo-400',
       border: 'border-indigo-400/20',
       glow: 'rgba(129,140,248,0.08)',
@@ -271,7 +271,7 @@ const About: React.FC = () => {
                 Core Skills
               </p>
               <div className='flex flex-wrap gap-2'>
-                {['React', 'Next.js', 'TypeScript', 'Node.js', 'Three.js', 'PostgreSQL'].map(tag => (
+                {['React', 'Next.js', 'TypeScript', 'Three.js', 'Tailwind CSS', 'Figma'].map(tag => (
                   <span
                     key={tag}
                     className='rounded-md border border-indigo-400/15 bg-indigo-400/6 px-2.5 py-1 font-mono text-[10px] text-indigo-300/70'

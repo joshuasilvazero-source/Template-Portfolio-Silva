@@ -16,23 +16,23 @@ const MODULES = [
     ],
   },
   {
-    id: 'backend',
-    label: 'Backend Systems',
+    id: 'tools',
+    label: 'Tools & Workflow',
     icon: '◉',
     accent: 'purple',
     skills: [
-      'Node.js', 'Express', 'REST APIs', 'GraphQL',
-      'NextAuth', 'Serverless', 'Middleware', 'JWT',
+      'Git / GitHub', 'Vite', 'Webpack', 'npm / yarn',
+      'VS Code', 'ESLint / Prettier', 'Storybook', 'Chrome DevTools',
     ],
   },
   {
-    id: 'data',
-    label: 'Data & DevOps',
+    id: 'quality',
+    label: 'Performance & Quality',
     icon: '◎',
     accent: 'indigo',
     skills: [
-      'PostgreSQL', 'MongoDB', 'Prisma ORM', 'Git / GitHub',
-      'Docker', 'Vercel', 'AWS (S3 / EC2)', 'Stripe',
+      'Lighthouse', 'Web Vitals', 'Vitest / Jest', 'Playwright',
+      'Accessibility (WCAG)', 'SEO', 'Responsive Design', 'Code Review',
     ],
   },
   {
