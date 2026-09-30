@@ -212,50 +212,44 @@ const Hero: React.FC = () => {
             {/* glow pulse behind the photo */}
             <motion.div
               animate={{ opacity: [0.35, 0.65, 0.35] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className='absolute -inset-3 rounded-3xl'
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              className='absolute -inset-4 rounded-4xl'
               style={{
-                background: 'radial-gradient(ellipse at center, rgba(0,229,255,0.15) 0%, transparent 70%)',
-                filter: 'blur(12px)',
+                background: 'radial-gradient(ellipse at center, rgba(0,229,255,0.10) 0%, rgba(168,85,247,0.05) 55%, transparent 75%)',
+                filter: 'blur(18px)',
               }}
             />
 
-            {/* photo frame */}
-            <motion.div
-              animate={{ boxShadow: [
-                '0 0 0 1px rgba(0,229,255,0.20), 0 8px 40px rgba(0,229,255,0.08)',
-                '0 0 0 1px rgba(0,229,255,0.40), 0 8px 60px rgba(0,229,255,0.18)',
-                '0 0 0 1px rgba(0,229,255,0.20), 0 8px 40px rgba(0,229,255,0.08)',
-              ]}}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className='relative h-80 w-60 overflow-hidden rounded-2xl sm:h-96 sm:w-72 md:h-105 md:w-80'
+            {/* photo frame — soft gradient border, elegant static shadow */}
+            <div
+              className='relative h-80 w-60 rounded-2xl p-px sm:h-96 sm:w-72 md:h-105 md:w-80'
+              style={{
+                background: 'linear-gradient(160deg, rgba(0,229,255,0.35), rgba(255,255,255,0.08) 40%, rgba(168,85,247,0.25))',
+                boxShadow: '0 20px 60px -12px rgba(0,0,0,0.6), 0 0 32px rgba(0,229,255,0.07)',
+              }}
             >
-              <Image
-                src='/images/hero/profile.jpg'
-                alt='Joshua Silva — UI/UX Specialist & Frontend Developer'
-                fill
-                sizes='(max-width: 640px) 240px, (max-width: 768px) 256px, 320px'
-                className='object-cover object-top'
-                priority
-              />
-              {/* subtle dark vignette at bottom */}
-              <div className='absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent' />
-            </motion.div>
+              <div className='relative h-full w-full overflow-hidden rounded-[15px]'>
+                <Image
+                  src='/images/hero/profile.jpg'
+                  alt='Joshua Silva — UI/UX Specialist & Frontend Developer'
+                  fill
+                  sizes='(max-width: 640px) 240px, (max-width: 768px) 256px, 320px'
+                  className='object-cover object-top'
+                  priority
+                />
+                {/* subtle dark vignette at bottom for caption legibility */}
+                <div className='absolute inset-0 bg-linear-to-t from-black/45 via-transparent to-transparent' />
+              </div>
+            </div>
 
-            {/* cyberpunk corner brackets */}
-            <span className='absolute -top-2 -left-2 block h-5 w-5 border-t-2 border-l-2 border-cyan-400/70 rounded-tl' />
-            <span className='absolute -top-2 -right-2 block h-5 w-5 border-t-2 border-r-2 border-cyan-400/70 rounded-tr' />
-            <span className='absolute -bottom-2 -left-2 block h-5 w-5 border-b-2 border-l-2 border-cyan-400/70 rounded-bl' />
-            <span className='absolute -bottom-2 -right-2 block h-5 w-5 border-b-2 border-r-2 border-cyan-400/70 rounded-br' />
-
-            {/* scan label */}
+            {/* caption */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
-              className='absolute -bottom-7 left-0 right-0 text-center font-mono text-[9px] uppercase tracking-[0.25em] text-cyan-400/40'
+              className='absolute -bottom-7 left-0 right-0 text-center font-mono text-[9px] uppercase tracking-[0.25em] text-gray-500'
             >
-              J. Silva · UI/UX · US Army
+              Joshua Silva · UI/UX Specialist
             </motion.p>
           </motion.div>
 
