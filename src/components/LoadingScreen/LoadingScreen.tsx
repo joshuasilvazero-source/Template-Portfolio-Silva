@@ -85,7 +85,7 @@ export const LoadingScreen: React.FC = () => {
             transition={{ delay: 0.6 }}
             className='mb-10 font-mono text-[10px] tracking-widest text-blue-400/60'
           >
-            FULL STACK DEVELOPER · MISSION CONTROL
+            UI/UX SPECIALIST · FRONTEND DEVELOPER
           </motion.p>
 
           {/* Status */}

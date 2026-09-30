@@ -4,8 +4,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Joshua Silva — Full Stack Developer",
-  description: "Learn more about Joshua Silva, Full Stack Developer and U.S. Army veteran.",
+  title: "About | Joshua Silva — UI/UX Specialist & Frontend Developer",
+  description: "Learn more about Joshua Silva, UI/UX Specialist and Frontend Developer, and U.S. Army veteran.",
 };
 
 const AboutPage = () => {

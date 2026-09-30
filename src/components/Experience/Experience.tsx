@@ -7,60 +7,61 @@ import { useRef } from 'react';
 /* ── data ─────────────────────────────────────────────────────────── */
 const MISSIONS = [
   {
-    id: 'dev',
+    id: 'focuspoint',
     log:     'LOG-001',
     status:  'ACTIVE',
-    role:    'Full Stack Developer',
-    org:     'Freelance',
-    period:  '2023 – Present',
+    role:    'UI/UX Specialist | Frontend & CMS Implementation',
+    org:     'FocusPoint · Remote',
+    period:  '2026 – Present',
     icon:    '◈',
     accent:  'teal',
     description:
-      'Designing and building premium web applications for clients across various industries. End-to-end ownership — from architecture and UI design to polished interfaces and deployment.',
+      'Design and implement production UI/UX enhancements across B2B portals and CMS-driven client sites, including BusesForSale, Lovato B2B Portal, and Jackson Pottery. I translate customer requirements, mockups, and visual direction into responsive interfaces, and diagnose frontend defects involving CSS specificity, responsive sizing, scrolling/overflow, grid behavior, pagination, and CMS constraints — working inside the FocusPoint CMS and existing client codebases rather than only greenfield builds.',
     highlights: [
-      'React / Next.js', 'TypeScript', 'UI/UX Design',
-      'Responsive Design', 'Performance Optimisation', 'Client Relations',
+      'UI/UX Design', 'Responsive Implementation', 'FocusPoint CMS',
+      'Checkout & Account Workflows', 'Production Debugging', 'Jira & Slack',
     ],
   },
   {
     id: 'army',
     log:     'LOG-002',
     status:  'COMPLETED',
-    role:    'Sergeant / Wheeled Mechanic',
+    role:    'Sergeant (E-5) / Wheeled Vehicle Mechanic (91B)',
     org:     'U.S. Army',
-    period:  '2017 – 2023',
-    icon:    '✦',
+    period:  '2021 – 2026',
+    icon:    '⛨',
     accent:  'cyan',
     description:
-      'Led teams of junior soldiers in high-stakes operational environments. Responsible for maintaining and repairing fleet vehicles, mission planning, and upholding strict safety and accountability standards.',
+      'Led and mentored soldiers, coordinated maintenance operations and training, prioritized competing requirements, and maintained accountability in deadline-driven environments. Diagnosed complex mechanical, hydraulic, and electrical systems, strengthening structured troubleshooting, root-cause analysis, and problem-solving skills.',
     highlights: [
-      'Team Leadership', 'Logistics & Planning', 'Equipment Management',
-      'Training & Mentorship', 'High-Pressure Execution',
+      'Team Leadership', 'Mechanical & Electrical Diagnostics', 'Training & Mentorship',
+      'Systematic Troubleshooting', 'Accountability & Readiness',
     ],
   },
   {
-    id: 'stem',
+    id: 'education',
     log:     'LOG-003',
     status:  'ARCHIVED',
-    role:    'STEM & Microbiology Studies',
-    org:     'Higher Education',
-    period:  '2015 – 2017',
+    role:    'B.S. in Biology',
+    org:     'University of Central Bayamón',
+    period:  'May 2021',
     icon:    '◎',
     accent:  'purple',
     description:
-      'Developed rigorous analytical thinking through laboratory science and research methodology — a foundation that directly informs debugging approach, architecture decisions, and data modelling.',
+      'Developed rigorous analytical thinking through laboratory science and research methodology — a foundation that carries into a systematic approach to debugging and product problem-solving.',
     highlights: [
       'Scientific Method', 'Data Analysis', 'Research Methodology', 'Critical Thinking',
     ],
   },
 ];
 
-type Accent = 'cyan' | 'teal' | 'purple';
+type Accent = 'cyan' | 'teal' | 'purple' | 'indigo';
 
 const COLORS: Record<Accent, { text: string; dot: string; badge: string; tag: string }> = {
   cyan:   { text: 'text-cyan-400',   dot: 'bg-cyan-400',   badge: 'text-cyan-400 border-cyan-400/30 bg-cyan-400/5',     tag: 'text-cyan-300   border-cyan-400/15   bg-cyan-400/5'   },
   teal:   { text: 'text-teal-400',   dot: 'bg-teal-400',   badge: 'text-teal-400 border-teal-400/30 bg-teal-400/5',     tag: 'text-teal-300   border-teal-400/15   bg-teal-400/5'   },
   purple: { text: 'text-purple-400', dot: 'bg-purple-400', badge: 'text-purple-400 border-purple-400/30 bg-purple-400/5', tag: 'text-purple-300 border-purple-400/15 bg-purple-400/5' },
+  indigo: { text: 'text-indigo-400', dot: 'bg-indigo-400', badge: 'text-indigo-400 border-indigo-400/30 bg-indigo-400/5', tag: 'text-indigo-300 border-indigo-400/15 bg-indigo-400/5' },
 };
 
 const STATUS_COLORS: Record<string, string> = {
@@ -182,7 +183,7 @@ const Experience: React.FC = () => (
         className='mb-10 text-center md:mb-16'
       >
         <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
-          04 — Journey
+          05 — Journey
         </p>
         <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
           <span className='text-cyan-400'>Galactic</span>

@@ -8,12 +8,13 @@ const TERMINAL_LINES = [
   { text: '$ ./initialize_mission_brief.sh', color: 'text-cyan-400',   delay: 0    },
   { text: '> Establishing secure channel…',  color: 'text-gray-400',   delay: 0.4  },
   { text: '> IDENTITY  : Joshua Silva',       color: 'text-white',      delay: 0.8  },
-  { text: '> ROLE      : Full Stack Developer',color: 'text-white',     delay: 1.1  },
-  { text: '> BACKGROUND: U.S. Army Sergeant | 6 Years Active Duty',
+  { text: '> ROLE      : UI/UX Specialist & Frontend Developer',
+                                              color: 'text-white',      delay: 1.1  },
+  { text: '> BACKGROUND: U.S. Army Sergeant | 5 Years Active Duty',
                                               color: 'text-white',      delay: 1.4  },
-  { text: '> SPEC      : Frontend · React/Next.js · TypeScript · UI/UX',
+  { text: '> SPEC      : UI/UX · React/Next.js · TypeScript · CMS Implementation',
                                               color: 'text-white',      delay: 1.7  },
-  { text: '> MISSION STATUS: [AVAILABLE_FOR_HIRE]',
+  { text: '> MISSION STATUS: [OPEN_TO_REMOTE_ROLES]',
                                               color: 'text-green-400',  delay: 2.1  },
   { text: '> All systems nominal. ■',         color: 'text-gray-500',   delay: 2.5  },
 ];
@@ -118,28 +119,28 @@ const About: React.FC = () => {
 
   const highlights = [
     {
-      heading: 'Military Discipline',
-      body: 'Six years as a U.S. Army Wheeled Mechanic and Sergeant forged the ability to perform under pressure, lead teams, and hold an uncompromising standard of excellence.',
+      heading: 'Design Meets Implementation',
+      body: 'I work at the point where UI/UX design meets frontend development — translating mockups and requirements into responsive, production-ready interfaces, then testing and refining them against real usage.',
       accent: 'text-cyan-400',
       border: 'border-cyan-400/20',
       glow: 'rgba(0,229,255,0.08)',
+      icon: '◈',
+    },
+    {
+      heading: 'Military Discipline',
+      body: 'Before technology, I served as a U.S. Army 91B Wheeled Vehicle Mechanic and later as a Sergeant. Diagnosing mechanical, electrical, and hydraulic systems taught me a systematic approach I now apply to debugging interfaces and improving digital products.',
+      accent: 'text-amber-400',
+      border: 'border-amber-400/20',
+      glow: 'rgba(245,158,11,0.08)',
       icon: '◉',
     },
     {
-      heading: 'The Career Pivot',
-      body: 'After separating from service, passion for problem-solving drove a full retrain as a full-stack developer — completing intensive bootcamp training and launching a freelance career.',
-      accent: 'text-purple-400',
-      border: 'border-purple-400/20',
-      glow: 'rgba(168,85,247,0.08)',
-      icon: '◎',
-    },
-    {
-      heading: 'Frontend Specialist',
-      body: 'Specialising in React, Next.js, TypeScript, and Three.js — building performant, visually compelling applications with polished interfaces and clean, maintainable code.',
+      heading: 'Production Troubleshooting',
+      body: 'Comfortable working inside existing CMS platforms and live client codebases — not just greenfield builds. I diagnose layout, responsive, and cross-browser issues and ship fixes clients can trust.',
       accent: 'text-indigo-400',
       border: 'border-indigo-400/20',
       glow: 'rgba(129,140,248,0.08)',
-      icon: '◈',
+      icon: '◎',
     },
   ];
 
@@ -242,7 +243,7 @@ const About: React.FC = () => {
           >
             {/* Stats grid */}
             <div className='grid grid-cols-2 gap-3'>
-              <CountStat target={6}   suffix='+' label='Years of Service'    sub='U.S. Army Sergeant' color='text-teal-400'   />
+              <CountStat target={5}   suffix='+' label='Years of Service'    sub='U.S. Army Sergeant' color='text-teal-400'   />
               <CountStat target={4}   suffix='+' label='Projects Delivered'  sub='Web Applications'   color='text-purple-400' />
               <CountStat target={10}  suffix='+' label='Technologies'        sub='Full Stack'          color='text-indigo-400' />
               <CountStat target={100} suffix='%' label='Commitment'          sub='Mission-First'       color='text-amber-400'  />
@@ -260,8 +261,8 @@ const About: React.FC = () => {
               </div>
               <div>
                 <p className='font-mono text-sm font-bold text-teal-400'>U.S. Army Veteran</p>
-                <p className='font-mono text-[11px] text-gray-400'>Sergeant · Wheeled Mechanic</p>
-                <p className='font-mono text-[10px] text-gray-500'>2017 – 2023 · 6 Years Active Duty</p>
+                <p className='font-mono text-[11px] text-gray-400'>Sergeant (E-5) · 91B Wheeled Vehicle Mechanic</p>
+                <p className='font-mono text-[10px] text-gray-500'>2021 – 2026 · 5 Years Active Duty</p>
               </div>
             </motion.div>
 
@@ -271,7 +272,7 @@ const About: React.FC = () => {
                 Core Skills
               </p>
               <div className='flex flex-wrap gap-2'>
-                {['React', 'Next.js', 'TypeScript', 'Three.js', 'Tailwind CSS', 'Figma'].map(tag => (
+                {['Figma', 'UI/UX Design', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS'].map(tag => (
                   <span
                     key={tag}
                     className='rounded-md border border-indigo-400/15 bg-indigo-400/6 px-2.5 py-1 font-mono text-[10px] text-indigo-300/70'
@@ -280,6 +281,16 @@ const About: React.FC = () => {
                   </span>
                 ))}
               </div>
+            </div>
+
+            {/* Education */}
+            <div className='rounded-xl border border-purple-400/20 bg-purple-400/3 p-5'>
+              <p className='mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-purple-400/70'>
+                Education
+              </p>
+              <p className='font-mono text-xs font-bold text-white'>B.S. in Biology</p>
+              <p className='font-mono text-[11px] text-gray-400'>University of Central Bayamón</p>
+              <p className='font-mono text-[10px] text-gray-500'>May 2021</p>
             </div>
           </motion.div>
         </div>

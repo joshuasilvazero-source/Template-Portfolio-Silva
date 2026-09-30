@@ -4,19 +4,25 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const HEADLINE_1  = 'Frontend Engineer';
-const HEADLINE_2  = 'Precise. Immersive. Shipped.';
+const ROLES = [
+  'UI/UX Specialist',
+  'Frontend Developer',
+  'UX Engineer',
+  'Frontend UI/UX Developer',
+];
+const HEADLINE_2  = 'Design. Build. Ship.';
 const SUBHEADLINE =
-  'I design and build production-ready frontend experiences — from immersive Three.js ' +
-  'environments to pixel-perfect React interfaces. Strong eye for detail, clean code, deployed and live.';
+  'UI/UX specialist and frontend developer combining user-centered design with hands-on ' +
+  'implementation. I build responsive interfaces, improve existing products, troubleshoot ' +
+  'production UI issues, and translate design requirements into functional web experiences.';
 
 const STACK = [
-  'React', 'Next.js', 'TypeScript', 'Three.js', 'Tailwind CSS', 'Figma',
+  'Figma', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js',
 ];
 
 const STATS = [
-  { value: '4+', label: 'Projects Deployed',    color: 'text-teal-400',   glow: 'rgba(45,212,191,0.4)'  },
-  { value: '6+', label: 'Yrs Military Service',  color: 'text-amber-400',  glow: 'rgba(245,158,11,0.4)'  },
+  { value: '4+', label: 'Client Projects',       color: 'text-teal-400',   glow: 'rgba(45,212,191,0.4)'  },
+  { value: '5+', label: 'Yrs Military Service',  color: 'text-amber-400',  glow: 'rgba(245,158,11,0.4)'  },
   { value: '3+', label: 'Yrs Dev Experience',    color: 'text-indigo-400', glow: 'rgba(129,140,248,0.4)' },
 ];
 
@@ -99,7 +105,7 @@ const Hero: React.FC = () => {
 
     const boot = setTimeout(() => {
       if (cancelled) return;
-      typeString(HEADLINE_1, setTyped1, 80, () => {
+      typeString(ROLES[0], setTyped1, 80, () => {
         if (cancelled) return;
         setTimeout(() => {
           if (cancelled) return;
@@ -120,6 +126,47 @@ const Hero: React.FC = () => {
 
     return () => { cancelled = true; clearTimeout(boot); };
   }, []);
+
+  /* rotating role titles — cycles once the boot sequence finishes */
+  useEffect(() => {
+    if (phase !== 3) return;
+    let cancelled = false;
+    let roleIndex = 0;
+
+    function typeRole(str: string, onDone: () => void) {
+      let i = 0;
+      function step() {
+        if (cancelled) return;
+        setTyped1(str.slice(0, ++i));
+        if (i < str.length) setTimeout(step, 55);
+        else onDone();
+      }
+      step();
+    }
+
+    function cycle() {
+      if (cancelled) return;
+      const current = ROLES[roleIndex];
+      setTimeout(() => {
+        if (cancelled) return;
+        let i = current.length;
+        const erase = () => {
+          if (cancelled) return;
+          setTyped1(current.slice(0, --i));
+          if (i > 0) setTimeout(erase, 32);
+          else {
+            roleIndex = (roleIndex + 1) % ROLES.length;
+            const next = ROLES[roleIndex];
+            typeRole(next, cycle);
+          }
+        };
+        erase();
+      }, 1600);
+    }
+
+    cycle();
+    return () => { cancelled = true; };
+  }, [phase]);
 
   return (
     <section
@@ -185,7 +232,7 @@ const Hero: React.FC = () => {
             >
               <Image
                 src='/images/hero/profile.jpg'
-                alt='Joshua Silva — Software Engineer'
+                alt='Joshua Silva — UI/UX Specialist & Frontend Developer'
                 fill
                 sizes='(max-width: 640px) 240px, (max-width: 768px) 256px, 320px'
                 className='object-cover object-top'
@@ -208,7 +255,7 @@ const Hero: React.FC = () => {
               transition={{ delay: 1.2 }}
               className='absolute -bottom-7 left-0 right-0 text-center font-mono text-[9px] uppercase tracking-[0.25em] text-cyan-400/40'
             >
-              J. Silva · SWE · US Army
+              J. Silva · UI/UX · US Army
             </motion.p>
           </motion.div>
 
@@ -244,7 +291,7 @@ const Hero: React.FC = () => {
                 <span className='text-3xl text-white/80 md:text-4xl lg:text-5xl'>
                   {typed1}
                 </span>
-                {phase === 0 && (
+                {(phase === 0 || phase === 3) && (
                   <span
                     className='ml-0.5 inline-block h-[0.85em] w-0.5 translate-y-px bg-white/70'
                     style={{ opacity: tick ? 1 : 0, transition: 'opacity 0.1s' }}

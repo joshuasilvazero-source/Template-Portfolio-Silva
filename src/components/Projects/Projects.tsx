@@ -291,7 +291,7 @@ const Projects: React.FC = () => (
         className='mb-10 text-center md:mb-16'
       >
         <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
-          03 — Work
+          04 — Personal Projects
         </p>
         <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
           <span className='text-cyan-400'>Mission</span>
@@ -299,7 +299,7 @@ const Projects: React.FC = () => (
           <span className='text-white'>Deployments</span>
         </h2>
         <p className='mt-4 font-mono text-sm text-gray-500'>
-          Hover cards to engage 3D interface · Click links to deploy
+          Independent builds — concept to deployed interface · Hover to engage
         </p>
       </motion.div>
 

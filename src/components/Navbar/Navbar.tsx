@@ -8,9 +8,10 @@ import { useGameStore } from '@/utils/gameStore';
 const NAV = [
   { label: 'About',      href: '#about',      code: 'A1' },
   { label: 'Skills',     href: '#skills',     code: 'A2' },
-  { label: 'Projects',   href: '#projects',   code: 'A3' },
-  { label: 'Experience', href: '#experience', code: 'A4' },
-  { label: 'Contact',    href: '#contact',    code: 'A5' },
+  { label: 'Work',       href: '#work',       code: 'A3' },
+  { label: 'Projects',   href: '#projects',   code: 'A4' },
+  { label: 'Experience', href: '#experience', code: 'A5' },
+  { label: 'Contact',    href: '#contact',    code: 'A6' },
 ];
 
 const Navbar: React.FC = () => {
@@ -74,7 +75,7 @@ const Navbar: React.FC = () => {
             <div className='hidden flex-col sm:flex'>
               <span className='font-mono text-sm font-bold leading-tight text-white'>Joshua Silva</span>
               <span className='font-mono text-[10px] leading-tight text-cyan-400/55 tracking-wider'>
-                Software Engineer
+                UI/UX Specialist &amp; Frontend Developer
               </span>
             </div>
           </motion.a>

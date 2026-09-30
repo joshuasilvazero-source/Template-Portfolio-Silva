@@ -7,6 +7,7 @@ import { LogoSvg } from '@/components/Logo/LogoSvg';
 const NAV_LINKS = [
   { label: 'About',      href: '#about' },
   { label: 'Skills',     href: '#skills' },
+  { label: 'Work',       href: '#work' },
   { label: 'Projects',   href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Contact',    href: '#contact' },
@@ -46,7 +47,7 @@ const Footer: React.FC = () => {
             </div>
             <div>
               <p className='font-mono text-sm font-bold text-white'>Joshua Silva</p>
-              <p className='font-mono text-[10px] text-gray-500'>Software Engineer</p>
+              <p className='font-mono text-[10px] text-gray-500'>UI/UX Specialist &amp; Frontend Developer</p>
             </div>
           </div>
 
@@ -86,12 +87,12 @@ const Footer: React.FC = () => {
                 </div>
                 <div>
                   <p className='font-mono text-sm font-bold text-white'>Joshua Silva</p>
-                  <p className='font-mono text-[10px] text-gray-500'>Software Engineer</p>
+                  <p className='font-mono text-[10px] text-gray-500'>UI/UX Specialist &amp; Frontend Developer</p>
                 </div>
               </div>
               <p className='mb-4 max-w-xs font-mono text-xs leading-relaxed text-gray-500'>
-                Building high-performance web applications with military precision
-                and a passion for clean, elegant code.
+                Designing and building production-ready interfaces with military
+                precision — from user-centered UX to clean, deployed code.
               </p>
               <p className='font-mono text-[9px] uppercase tracking-[0.15em] text-gray-700'>
                 ◉ {COORDS}

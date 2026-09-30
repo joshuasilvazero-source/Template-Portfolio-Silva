@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
           <hr style="border-color:#1e293b;margin:16px 0">
           <p style="color:#64748b;font-size:12px">Your message:</p>
           <pre style="background:#1e293b;padding:12px;border-radius:6px;color:#94a3b8;white-space:pre-wrap">${escapeHtml(message)}</pre>
-          <p style="margin-top:16px">— Joshua Silva<br><span style="color:#00e5ff">Full Stack Developer</span></p>
+          <p style="margin-top:16px">— Joshua Silva<br><span style="color:#00e5ff">UI/UX Specialist &amp; Frontend Developer</span></p>
         </div>
       `,
     });

@@ -6,51 +6,49 @@ import { motion } from 'framer-motion';
 /* ── data ─────────────────────────────────────────────────────────── */
 const MODULES = [
   {
-    id: 'frontend',
-    label: 'Frontend Systems',
+    id: 'uiux',
+    label: 'UI / UX',
     icon: '◈',
+    accent: 'teal',
+    skills: [
+      'Figma', 'Responsive Design', 'User Interface Design', 'UX Improvement',
+      'Interaction Design', 'Design Implementation', 'Accessibility-Minded UI', 'Cross-Browser Compatibility',
+    ],
+  },
+  {
+    id: 'frontend',
+    label: 'Frontend',
+    icon: '◉',
     accent: 'cyan',
     skills: [
-      'HTML5', 'CSS3', 'JavaScript (ES2024)', 'TypeScript',
-      'React 18', 'Next.js 15', 'Tailwind CSS', 'Framer Motion',
+      'HTML5', 'CSS3', 'JavaScript (ES6+)', 'TypeScript',
+      'React.js', 'Next.js', 'Tailwind CSS', 'Framer Motion',
     ],
   },
   {
-    id: 'tools',
-    label: 'Tools & Workflow',
-    icon: '◉',
-    accent: 'purple',
-    skills: [
-      'Git / GitHub', 'Vite', 'Webpack', 'npm / yarn',
-      'VS Code', 'ESLint / Prettier', 'Storybook', 'Chrome DevTools',
-    ],
-  },
-  {
-    id: 'quality',
-    label: 'Performance & Quality',
+    id: 'backend',
+    label: 'Backend / Data',
     icon: '◎',
     accent: 'indigo',
     skills: [
-      'Lighthouse', 'Web Vitals', 'Vitest / Jest', 'Playwright',
-      'Accessibility (WCAG)', 'SEO', 'Responsive Design', 'Code Review',
+      'Node.js', 'Express.js', 'MySQL', 'MongoDB', 'REST APIs',
     ],
   },
   {
-    id: 'creative',
-    label: '3D & Creative',
+    id: 'cms',
+    label: 'CMS / Platforms',
     icon: '✦',
-    accent: 'teal',
+    accent: 'purple',
     skills: [
-      'Three.js', 'WebGL', 'Framer Motion', 'GSAP',
-      'UI/UX Design', 'Responsive Design', 'Accessibility', 'Figma',
+      'FocusPoint CMS', 'HubSpot', 'WordLift',
     ],
   },
 ];
 
 const ALSO = [
-  'Responsive Design', 'Performance Optimisation', 'Accessibility (WCAG)',
-  'Testing & QA', 'Code Review', 'Documentation', 'Agile / Scrum', 'SEO',
-  'Three.js', 'WebGL', 'Figma', 'Technical Writing',
+  'Git', 'GitHub', 'VS Code', 'Vercel', 'Jira', 'Slack',
+  'Debugging', 'Production Troubleshooting', 'SEO', 'API Integration',
+  'Agile Development', 'Full Stack Development',
 ];
 
 type Accent = 'cyan' | 'purple' | 'indigo' | 'teal';
@@ -199,6 +197,33 @@ const Skills: React.FC = () => (
               className='cursor-default rounded-md border border-white/8 bg-white/3 px-3 py-1 font-mono text-xs text-gray-500 transition-colors hover:border-white/15 hover:text-gray-300'
             >
               {s}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ── Certifications strip ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.32 }}
+        className='mt-5 rounded-xl border border-teal-400/15 bg-teal-400/2 px-6 py-5 backdrop-blur-sm'
+      >
+        <div className='mb-3 flex items-center gap-3'>
+          <div className='h-px flex-1 bg-linear-to-r from-transparent via-teal-400/15 to-transparent' />
+          <p className='font-mono text-[9px] font-bold uppercase tracking-[0.25em] text-teal-400/60'>
+            Certifications
+          </p>
+          <div className='h-px flex-1 bg-linear-to-r from-transparent via-teal-400/15 to-transparent' />
+        </div>
+        <div className='flex flex-wrap justify-center gap-2'>
+          {['React JS Certificate', 'MySQL Certificate', 'JavaScript Certificate', 'HTML & CSS Certificate'].map(c => (
+            <span
+              key={c}
+              className='cursor-default rounded-md border border-teal-400/15 bg-teal-400/5 px-3 py-1 font-mono text-xs text-teal-300/70'
+            >
+              {c}
             </span>
           ))}
         </div>

@@ -2,23 +2,25 @@ import { Metadata } from 'next';
 import Hero from '@/components/Hero/Hero';
 import About from '@/components/About/About';
 import Skills from '@/components/Skills/Skills';
+import ProfessionalWork from '@/components/ProfessionalWork/ProfessionalWork';
 import Projects from '@/components/Projects/Projects';
 import Experience from '@/components/Experience/Experience';
 import Contact from '@/components/Contact/Contact';
 
 export const metadata: Metadata = {
-  title: 'Joshua Silva — Frontend Engineer | Building Digital Universes',
+  title: 'Joshua Silva | UI/UX Specialist & Frontend Developer',
   description:
-    'Cinematic interstellar portfolio. Frontend engineer specialising in React, Next.js, TypeScript, Three.js, and immersive 3D web experiences. U.S. Army veteran.',
+    'Portfolio of Joshua Silva, a UI/UX Specialist and Frontend Developer building responsive, user-centered web experiences using React, JavaScript, modern CSS, and production CMS platforms.',
   keywords: [
-    'Frontend Engineer',
-    'React',
+    'Joshua Silva',
+    'UI/UX Developer',
+    'UX Engineer',
+    'Frontend Developer',
+    'React Developer',
+    'Colorado Springs',
+    'Remote Frontend Developer',
     'Next.js',
     'TypeScript',
-    'Three.js',
-    'Portfolio',
-    'Interstellar',
-    '3D Web',
   ],
 };
 
@@ -28,6 +30,7 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
+      <ProfessionalWork />
       <Projects />
       <Experience />
       <Contact />

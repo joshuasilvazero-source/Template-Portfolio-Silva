@@ -1,32 +1,33 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Joshua Silva — Frontend Engineer | Building Digital Universes',
+  title: 'Joshua Silva | UI/UX Specialist & Frontend Developer',
   description:
-    'Cinematic interstellar developer portfolio. React · Next.js · TypeScript · Three.js · Tailwind CSS. U.S. Army veteran turned frontend engineer.',
+    'Portfolio of Joshua Silva, a UI/UX Specialist and Frontend Developer building responsive, user-centered web experiences using React, JavaScript, modern CSS, and production CMS platforms.',
   keywords: [
     'Joshua Silva',
-    'Frontend Engineer',
-    'React',
+    'UI/UX Developer',
+    'UX Engineer',
+    'Frontend Developer',
+    'React Developer',
+    'Colorado Springs',
+    'Remote Frontend Developer',
     'Next.js',
     'TypeScript',
-    'Three.js',
     'Portfolio',
-    'Interstellar',
-    '3D Web',
   ],
   authors: [{ name: 'Joshua Silva' }],
   openGraph: {
-    title: 'Joshua Silva - Frontend Engineer',
+    title: 'Joshua Silva | UI/UX Specialist & Frontend Developer',
     description:
-      'Premium frontend engineer portfolio with immersive Three.js experiences',
+      'UI/UX Specialist and Frontend Developer building responsive, user-centered web experiences.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Joshua Silva - Frontend Engineer',
-    description: 'Premium frontend portfolio built with Next.js and React',
+    title: 'Joshua Silva | UI/UX Specialist & Frontend Developer',
+    description: 'Portfolio of a UI/UX Specialist and Frontend Developer — React, Next.js, and production CMS work.',
   },
 };
 

@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
           className='mb-4 text-center'
         >
           <p className='mb-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-cyan-400/55'>
-            05 — Contact
+            06 — Contact
           </p>
           <h2 className='font-mono text-3xl font-black sm:text-4xl md:text-5xl'>
             <span className='text-cyan-400'>Transmission</span>

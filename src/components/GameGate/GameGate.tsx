@@ -41,6 +41,12 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
     setTimeout(() => setGameUnlocked(true), 2600);
   };
 
+  const handleSkip = () => {
+    localStorage.setItem('gameUnlocked', 'true');
+    setShowReplayBtn(true);
+    setGameUnlocked(true);
+  };
+
   if (loading) {
     return (
       <div className='flex min-h-screen items-center justify-center bg-linear-to-br from-[#0a0e27] to-[#1a1f3a]'>
@@ -85,12 +91,20 @@ export const GameGate: React.FC<GameGateProps> = ({ children }) => {
             </h1>
 
             <p className='mb-2 font-mono text-lg text-green-400'>
-              Software Engineer · U.S. Army Veteran
+              UI/UX Specialist &amp; Frontend Developer · U.S. Army Veteran
             </p>
 
             <p className='font-mono text-sm text-cyan-400/70'>
               Complete the game to unlock access to the portfolio
             </p>
+
+            <button
+              type='button'
+              onClick={handleSkip}
+              className='mt-4 inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/3 px-3 py-1.5 font-mono text-[11px] text-gray-400 transition-all hover:border-cyan-400/40 hover:text-cyan-300'
+            >
+              Skip → View Portfolio
+            </button>
           </motion.div>
 
           <motion.div
