@@ -1,85 +1,154 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { normalizeInquiry, validateInquiry, type Inquiry } from '@/lib/inquiry';
+import { plans } from '@/content/maintenance';
+import { site } from '@/content/site';
 
-const validateEmail = (email: string): boolean =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+/**
+ * Project inquiry endpoint. Sends the inquiry to your inbox through Gmail SMTP
+ * (EMAIL_USER / EMAIL_PASSWORD — a Google App Password, never your real password).
+ *
+ * Spam protection: hidden honeypot field, minimum fill time, per-IP rate limit,
+ * strict validation, and a payload size cap. The rate limit is in-memory, so it
+ * is best-effort on serverless (each instance keeps its own counter). If spam
+ * becomes a problem, add Cloudflare Turnstile or Vercel BotID.
+ */
 
-function escapeHtml(text: string): string {
-  const map: Record<string, string> = {
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;',
-  };
-  return text.replace(/[&<>"']/g, m => map[m]);
+export const runtime = 'nodejs';
+
+const MAX_BODY_BYTES = 16_000;
+const MIN_FILL_MS = 3_000;
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 5;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter(t => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5_000) hits.clear(); // keep memory bounded
+  return recent.length > MAX_PER_WINDOW;
+}
+
+const escapeHtml = (text: string) =>
+  text.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]!);
+
+/** Strip CR/LF so user input can never inject email headers. */
+const oneLine = (text: string) => text.replace(/[\r\n]+/g, ' ').slice(0, 150);
+
+function row(label: string, value: string) {
+  return `<tr><td style="padding:6px 16px 6px 0;color:#5b6573;vertical-align:top">${label}</td><td style="padding:6px 0;color:#1b2430">${
+    value ? escapeHtml(value) : '<span style="color:#a9b3bf">—</span>'
+  }</td></tr>`;
+}
+
+function ownerEmail(d: Inquiry) {
+  const planName = plans.find(p => p.id === d.plan)?.name ?? '';
+  return `
+  <div style="font-family:Arial,sans-serif;max-width:640px;color:#1b2430">
+    <h2 style="margin:0 0 4px">New project inquiry</h2>
+    <p style="margin:0 0 20px;color:#5b6573">Reply to this email to respond to ${escapeHtml(d.name)} directly.</p>
+    <table style="border-collapse:collapse;font-size:14px">
+      ${row('Name', d.name)}
+      ${row('Business', d.business)}
+      ${row('Email', d.email)}
+      ${row('Website', d.website)}
+      ${row('Service', d.service)}
+      ${row('Plan requested', planName)}
+      ${row('Budget', d.budget)}
+      ${row('Timeline', d.timeline)}
+      ${row('Care plan interest', d.care)}
+    </table>
+    <h3 style="margin:24px 0 8px;font-size:15px">Project description</h3>
+    <div style="white-space:pre-wrap;background:#f3f5f7;padding:16px;border-radius:8px;font-size:14px;line-height:1.6">${escapeHtml(d.message)}</div>
+  </div>`;
+}
+
+/** Deliberately does NOT echo the visitor's message, so the form can't be used to relay spam. */
+function confirmationEmail(name: string) {
+  return `
+  <div style="font-family:Arial,sans-serif;max-width:560px;color:#1b2430;line-height:1.6">
+    <p>Hi ${escapeHtml(name)},</p>
+    <p>Thanks for reaching out. I have your project inquiry and will reply within ${site.responseTime} (${site.hours}).</p>
+    <p>If anything changes in the meantime, just reply to this email.</p>
+    <p>— ${site.name}<br><span style="color:#5b6573">${site.businessName}</span></p>
+    <p style="font-size:12px;color:#5b6573">You are receiving this because this address was entered on the contact form at ${escapeHtml(site.url)}. If that was not you, you can ignore this email.</p>
+  </div>`;
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const { name, email, message } = await request.json();
-
-    if (!name || !email || !message)
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-
-    if (!validateEmail(email))
-      return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
-
-    if (message.length < 10)
-      return NextResponse.json({ error: 'Message too short' }, { status: 400 });
-
-    const user = process.env.EMAIL_USER;
-    const pass = process.env.EMAIL_PASSWORD;
-
-    if (!user || !pass)
-      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
-
-    // Create transporter inside handler so env vars are always resolved
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: { user, pass },
-    });
-
-    // Email to you
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${user}>`,
-      to: user,
-      replyTo: email,
-      subject: `New message from ${name}`,
-      html: `
-        <div style="font-family:monospace;background:#0a0e17;color:#e2e8f0;padding:24px;border-radius:8px">
-          <h2 style="color:#00e5ff;margin:0 0 16px">New Portfolio Transmission</h2>
-          <p><span style="color:#94a3b8">From:</span> ${escapeHtml(name)}</p>
-          <p><span style="color:#94a3b8">Email:</span> ${escapeHtml(email)}</p>
-          <hr style="border-color:#1e293b;margin:16px 0">
-          <p style="color:#94a3b8;margin-bottom:8px">Message:</p>
-          <pre style="background:#1e293b;padding:12px;border-radius:6px;white-space:pre-wrap">${escapeHtml(message)}</pre>
-          <p style="color:#64748b;font-size:12px;margin-top:16px">Hit reply to respond directly to ${escapeHtml(name)}</p>
-        </div>
-      `,
-    });
-
-    // Auto-reply to sender
-    await transporter.sendMail({
-      from: `"Joshua Silva" <${user}>`,
-      to: email,
-      subject: 'Message received — Joshua Silva',
-      html: `
-        <div style="font-family:monospace;background:#0a0e17;color:#e2e8f0;padding:24px;border-radius:8px">
-          <h2 style="color:#00e5ff;margin:0 0 16px">Transmission Received</h2>
-          <p>Hi ${escapeHtml(name)},</p>
-          <p>Got your message — I'll get back to you within 24 hours.</p>
-          <hr style="border-color:#1e293b;margin:16px 0">
-          <p style="color:#64748b;font-size:12px">Your message:</p>
-          <pre style="background:#1e293b;padding:12px;border-radius:6px;color:#94a3b8;white-space:pre-wrap">${escapeHtml(message)}</pre>
-          <p style="margin-top:16px">— Joshua Silva<br><span style="color:#00e5ff">UI/UX Specialist &amp; Frontend Developer</span></p>
-        </div>
-      `,
-    });
-
-    return NextResponse.json({ success: true }, { status: 200 });
-
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Contact form error:', message);
-    return NextResponse.json({ error: message }, { status: 500 });
+  const contentLength = Number(request.headers.get('content-length') ?? 0);
+  if (contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: 'The message is too long.' }, { status: 413 });
   }
+
+  let raw: Record<string, unknown>;
+  try {
+    raw = await request.json();
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('not an object');
+  } catch {
+    return NextResponse.json({ error: 'The form data could not be read. Refresh the page and try again.' }, { status: 400 });
+  }
+
+  // Honeypot or too-fast submission: pretend success so bots learn nothing.
+  const elapsed = Number(raw.elapsed ?? 0);
+  if ((typeof raw.fax === 'string' && raw.fax.trim() !== '') || !Number.isFinite(elapsed) || elapsed < MIN_FILL_MS) {
+    return NextResponse.json({ success: true });
+  }
+
+  const ip = (request.headers.get('x-forwarded-for') ?? '').split(',')[0].trim() || 'unknown';
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      { error: 'Too many messages were sent from this connection. Wait a few minutes and try again.' },
+      { status: 429 },
+    );
+  }
+
+  const data = normalizeInquiry(raw);
+  const fields = validateInquiry(data);
+  if (Object.keys(fields).length) {
+    return NextResponse.json({ error: 'Some fields need attention.', fields }, { status: 400 });
+  }
+
+  const user = process.env.EMAIL_USER;
+  const pass = process.env.EMAIL_PASSWORD;
+  if (!user || !pass) {
+    console.error('Contact form: EMAIL_USER / EMAIL_PASSWORD are not set.');
+    return NextResponse.json({ error: 'The contact form is temporarily unavailable.' }, { status: 503 });
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: { user, pass },
+  });
+
+  try {
+    await transporter.sendMail({
+      from: `"Website inquiry" <${user}>`,
+      to: process.env.INQUIRY_TO || user,
+      replyTo: data.email,
+      subject: oneLine(`Inquiry: ${data.service} — ${data.name}${data.business ? ` (${data.business})` : ''}`),
+      html: ownerEmail(data),
+    });
+  } catch (error) {
+    console.error('Contact form: send failed —', error instanceof Error ? error.message : error);
+    return NextResponse.json({ error: 'The message could not be sent right now.' }, { status: 502 });
+  }
+
+  // Confirmation is best-effort; the inquiry already reached you.
+  try {
+    await transporter.sendMail({
+      from: `"${site.name}" <${user}>`,
+      to: data.email,
+      subject: 'I received your project inquiry',
+      html: confirmationEmail(data.name),
+    });
+  } catch (error) {
+    console.error('Contact form: confirmation failed —', error instanceof Error ? error.message : error);
+  }
+
+  return NextResponse.json({ success: true });
 }
